@@ -1,0 +1,266 @@
+/*
+  Theme Name: Ben Fatto Academy
+  Date: 10 2022
+  Author: Tarciso Velame (tarciso.velame@benfatto.net.br)
+  Description: Tema desenvolvido para ministrar o curso da Ben Fatto de Angular 
+  Version: 1.0
+*/
+
+@import url("reset.css");
+@import url("../fonts/stylesheet.css");
+
+/* GERAL */
+
+body {
+  background: #f0f8f8;
+}
+
+h1 {
+  font-family: "Halva", Arial, Verdana;
+  font-size: 2em;
+  margin-bottom: 25px;
+}
+
+h1 .active, h1 span {
+  color: #1fccbf;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container-fluid {
+  padding-left: 0  !important;
+  padding-right: 0  !important;
+  display: flex;
+}
+
+.valign-pai { display: table; }
+.valign { display: table-cell; vertical-align: middle; }
+
+
+/* MENU */
+.menu {
+  width: 250px;
+  height: 100vh;
+  background: rgb(47,150,234);
+  background: linear-gradient(0deg, rgba(39,206,208,1) 0%, rgba(47,150,234,1) 100%);
+  background: linear-gradient(0deg,  0%,  100%);
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 25%), inset 0 -1px 0 rgb(0 0 0 / 25%);
+}
+
+.menu .logo {
+  background: rgba(0,0,0,.1);
+  text-align: center;
+  padding: 15px;
+}
+
+.menu nav ul {
+  padding-left: 0;
+}
+
+.menu nav li a {
+  font-family: "Halva", Arial, Verdana;
+  font-size: .8em;
+  color: #fff;
+  padding: 10px 15px;
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  transition: background .5s, color .5s;
+}
+
+.menu nav li a:hover {
+  background: rgba(0,0,0,.05);
+  color: #cf0;
+  transition: background .5s, color .5s;
+}
+
+.menu nav li a.active {
+  color: #cf0;
+}
+
+.menu nav li a span {
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+
+/* CONTENT */
+.content {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 25px;
+  overflow: auto;
+}
+
+/* HOME */
+.home {
+  text-align: center;
+}
+
+
+/* PROFESSORES */
+.professor img {
+  margin: -25px 25px 0 -25px;
+  height: 250px;
+
+  float:left;
+}
+
+.flag {
+  color: #777;
+  font-style: italic;
+}
+
+.flag img {
+  margin: 5px 5px 0 0;
+  float: left;
+}
+
+
+/* FALE CONOSCO */
+
+.contatos a {
+  color: #fff;
+  padding: 25px;
+  display: block;
+}
+
+.btn-whatsapp { background:#01E675; }
+.btn-whatsapp:hover { background:#00d66c; }
+
+.btn-email { background:#277fac; }
+.btn-email:hover { background:#1e709a; }
+
+.btn-instagram { background:#f08400; }
+.btn-instagram:hover { background:#d87700; }
+
+.btn-maps { background:#d32e29; }
+.btn-maps:hover { background:#c2231e; }
+
+.btn-waze { background:#31cbfd; }
+.btn-waze:hover { background:#25bdee; }
+
+.btn-comunicacao { background:#3aae58; }
+.btn-comunicacao:hover { background:#199a5a; }
+
+.fale-conosco-email strong {
+	font-size:1.2em;
+	display:block;
+}
+
+
+
+/* CARD */
+.card {
+  text-align: center;
+  width: 12rem;
+  margin-left: 0;
+  border-radius: 0;
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+.card .card-title {
+  font-family: "Halva", Arial, Verdana;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.card .card-subtitle {
+  color: #777;
+  font-size: .8em;
+  font-style: italic;
+  position: relative;
+  top: -15px;
+}
+
+.card .card-body {
+  height: 200px;
+}
+
+.card .adm {
+  background: #eee;
+  background: rgba(248, 248, 248, 0.8);
+  padding: 5px 10px;
+  font-size: .8em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.card .adm .delete {
+  color: #e61616;
+  margin-left: 3px
+}
+
+.card:hover .adm {
+  transition: opacity .5s;
+  opacity: 1;
+}
+
+.card .delete-confirm {
+  background: rgba(207, 0, 0, 0.8);
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-family: "Halva", Arial, Verdana;
+  font-size: 1.6em;
+  font-weight: bold;
+  padding-top: 45px;
+  z-index: 10;
+}
+
+.card .delete-confirm p {
+  margin-bottom: 10px;
+}
+
+.card .delete-confirm .btn {
+  font-size: .6em;
+}
+
+
+/* BTN */
+.btn {
+  border-radius: 0;
+}
+
+.btn + .btn {
+  margin-left: 5px;
+}
+
+.btn-primary {
+  background: #298BD0;
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  background: #2AB6DB;
+  border-color: transparent;
+}
+
+.btn-primary-hover:hover {
+  background: #2AB6DB;
+  border-color: transparent;
+}
+
+
+/* FORM */
+.form-control {
+  border-radius: 0;
+}
+
+
+/* TABLE */
+.table {
+  background: #fff;
+}
+
+/* BS layout */
+.row + .row {
+  margin-top: 15px;
+}
+

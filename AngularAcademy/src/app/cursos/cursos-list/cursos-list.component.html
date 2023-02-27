@@ -1,0 +1,25 @@
+<div class="content">
+  
+    <a href="cursos-form.html" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Novo Curso</a>
+    <h1><span class="fas fa-code"></span> Nosso <span class="active">Cursos</span></h1>
+
+    <div *ngFor="let curso of cursos" class="card">
+      <!-- <div class="delete-confirm">
+        <p>Tem certeza?</p>
+        <button class="btn btn-light">Excluir</button>
+        <button class="btn btn-outline-light">Cancelar</button>
+      </div> -->
+      <div class="adm">
+        <a href="#" class="edit"><span class="fas fa-pen-to-square"></span></a>
+        <a href="#" class="delete"><span class="far fa-trash-can"></span></a>
+      </div>
+      <div class="card-body">
+        <img src="{{ curso.thumb }}" alt="">
+      </div>
+      <h5 class="card-title">{{ curso.nome }}</h5>
+      <div class="d-grid">
+        <a href="cursos-single.html" class="btn btn-dark btn-primary-hover">Visualizar</a>
+      </div>
+    </div>
+
+  </div>

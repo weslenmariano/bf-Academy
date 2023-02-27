@@ -1,0 +1,14 @@
+:link, :visited { text-decoration: none; }
+:focus { outline: 0; }
+ul, ol { list-style: none; }
+h1, h2, h3, h4, h5, h6, pre, code { font-size: 1em; }
+ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, body, html, p, blockquote, fieldset, input {
+    margin: 0;
+    padding: 0;
+	box-sizing: border-box;
+}
+a img, :link img, :visited img { border: none; }
+a:hover, button:hover { cursor: pointer; }
+address { font-style: normal; }
+table { border-collapse: collapse; border-spacing: 0; }
+input, textarea, select, button {font-size: 100%;font-family: inherit;}

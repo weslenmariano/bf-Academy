@@ -1,0 +1,158 @@
+{
+  "cursos": [
+    {
+      "id": 1,
+      "nome": "Angular",
+      "thumb": "assets/images/curso-angular-logo.png",
+      "cargaHoraria": "40h",
+      "duracao": "10 semanas",
+      "valor": "R$ 3.850,00",
+      "dificuldade": 4,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 2,
+      "nome": "HTML 5*",
+      "thumb": "assets/images/curso-html5-logo.png",
+      "cargaHoraria": "20h",
+      "duracao": "5 semanas",
+      "valor": "R$ 1.200,00",
+      "dificuldade": 2,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 3,
+      "nome": "Java EE",
+      "thumb": "assets/images/curso-java-logo.png",
+      "cargaHoraria": "120h",
+      "duracao": "15 semanas",
+      "valor": "R$ 4.900,00",
+      "dificuldade": 5,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 4,
+      "nome": "Docker",
+      "thumb": "assets/images/curso-docker-logo.png",
+      "cargaHoraria": "30h",
+      "duracao": "6 semanas",
+      "valor": "R$ 1.800,00",
+      "dificuldade": 3,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 5,
+      "nome": "Wordpress",
+      "thumb": "assets/images/curso-wordpress-logo.png",
+      "cargaHoraria": "48h",
+      "duracao": "8 semanas",
+      "valor": "R$ 2.300,00",
+      "dificuldade": 3,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 6,
+      "nome": "111",
+      "thumb": "2",
+      "cargaHoraria": "3",
+      "duracao": null,
+      "valor": "4",
+      "dificuldade": "5",
+      "descricao": "6"
+    }
+  ],
+  "professores": [
+    {
+      "id": 1,
+      "nome": "Brad Pitt",
+      "thumb": "assets/images/professores/brad-pitt.jpg",
+      "skills": "HTML, CSS",
+      "origem": "Americano",
+      "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/us.png",
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 2,
+      "nome": "Tim Berners Lee*",
+      "thumb": "assets/images/professores/tim-berners-lee.jpg",
+      "skills": "HTML",
+      "origem": "Britânico",
+      "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/gb.png",
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 3,
+      "nome": "James Gosling",
+      "thumb": "assets/images/professores/james-gosling.jpg",
+      "skills": "Java",
+      "origem": "Canadense",
+      "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/ca.png",
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 4,
+      "nome": "Viola Davis",
+      "thumb": "assets/images/professores/viola-davis.jpg",
+      "skills": "Angular, HTML, CSS",
+      "origem": "Americana",
+      "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/us.png",
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 5,
+      "nome": "Larry Page",
+      "thumb": "assets/images/professores/larry-page.jpg",
+      "skills": "Angular",
+      "origem": "Americano",
+      "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/us.png",
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 6,
+      "nome": "Glória Pires",
+      "thumb": "assets/images/professores/gloria-pires.jpg",
+      "skills": "Docker",
+      "origem": "Brasileira",
+      "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/br.png",
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    }
+  ],
+  "turmas": [
+    {
+      "id": 1,
+      "curso": "Angular",
+      "inicio": "10/01/2022",
+      "cargaHoraria": "40h",
+      "duracao": "5 semanas",
+      "valor": "R$ 2.300,00",
+      "dificuldade": 3
+    },
+    {
+      "id": 2,
+      "curso": "HTML 5",
+      "inicio": "15/01/2022",
+      "cargaHoraria": "20h",
+      "duracao": "2 semanas",
+      "valor": "R$ 1.200,00",
+      "dificuldade": 1
+    },
+    {
+      "id": 3,
+      "curso": "Angular",
+      "inicio": "21/01/2022",
+      "cargaHoraria": "40h",
+      "duracao": "5 semanas",
+      "valor": "R$ 2.300,00",
+      "dificuldade": 3
+    },
+    {
+      "id": 4,
+      "curso": "Java",
+      "inicio": "03/02/2022",
+      "cargaHoraria": "120h",
+      "duracao": "12 semanas",
+      "valor": "R$ 4.900,00",
+      "dificuldade": 5
+    }
+  ]
+}
