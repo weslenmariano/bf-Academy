@@ -53,12 +53,22 @@
     {
       "id": 6,
       "nome": "111",
-      "thumb": "2",
+      "thumb": "assets/images/curso-wordpress-logo.png",
       "cargaHoraria": "3",
       "duracao": null,
       "valor": "4",
       "dificuldade": "5",
       "descricao": "6"
+    },
+    {
+      "id": 7,
+      "nome": "1",
+      "thumb": "2",
+      "cargaHoraria": "3",
+      "duracao": "4",
+      "valor": "5",
+      "dificuldade": "6",
+      "descricao": "7"
     }
   ],
   "professores": [

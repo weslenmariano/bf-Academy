@@ -1,13 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Professor } from './professores.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfessoresService {
 
-  constructor() { }
+  API = environment.apiUrl
+
+  constructor( 
+    private http: HttpClient
+  ) { }
+
+
 
   getAllProfessores(){
+    return this.http.get<Professor[]>(`${this.API}/professores`)
+  }
+
+  getAllProfessoresOld(){
 
     return [
       { 

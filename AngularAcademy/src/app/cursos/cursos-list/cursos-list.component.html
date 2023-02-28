@@ -1,6 +1,7 @@
+<app-spin *ngIf="spin"></app-spin>
 <div class="content">
   
-    <a href="cursos-form.html" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Novo Curso</a>
+    <a routerLink="novo" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Novo Curso</a>
     <h1><span class="fas fa-code"></span> Nosso <span class="active">Cursos</span></h1>
 
     <div *ngFor="let curso of cursos" class="card">
@@ -14,11 +15,11 @@
         <a href="#" class="delete"><span class="far fa-trash-can"></span></a>
       </div>
       <div class="card-body">
-        <img src="{{ curso.thumb }}" alt="">
+        <img src="{{ curso?.thumb }}" alt="">
       </div>
-      <h5 class="card-title">{{ curso.nome }}</h5>
+      <h5 class="card-title">{{ curso?.nome }}</h5>
       <div class="d-grid">
-        <a href="cursos-single.html" class="btn btn-dark btn-primary-hover">Visualizar</a>
+        <a routerLink="{{ curso?.id }}" class="btn btn-dark btn-primary-hover">Visualizar</a>
       </div>
     </div>
 

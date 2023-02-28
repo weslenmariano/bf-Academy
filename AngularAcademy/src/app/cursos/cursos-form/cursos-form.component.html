@@ -1,0 +1,45 @@
+<div class="content">
+    <h1><span class="fas fa-code"></span> CADASTRANDO/EDITANDO Curso de <span class="active">Angular</span></h1>
+
+    <form [formGroup] = "formulario">
+      <div class="row">
+        <div class="col-md-4">
+          <label>Nome</label>
+          <input type="text" formControlName="nome" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-8">
+          <label>URL da thumb</label>
+          <input type="text" formControlName="thumb" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-2">
+          <label>Carga horária</label>
+          <input type="text" formControlName="cargaHoraria" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-2">
+            <label>Duração</label>
+            <input type="text" formControlName="duracao" class="form-control form-control-sm" />
+          </div>
+        <div class="col-md-3">
+          <label>Valor</label>
+          <input type="text" formControlName="valor" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-2">
+          <label>Dificuldade</label>
+          <input type="text" formControlName="dificuldade" class="form-control form-control-sm" />
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <label>Descrição</label>
+          <textarea formControlName="descricao" class="form-control form-control-sm" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button (click)="onSubmit()" class="btn btn-success"><span class="fas fa-floppy-disk"></span> Salvar</button>
+          <button class="btn btn-danger"><span class="fas fa-times"></span> Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </div>

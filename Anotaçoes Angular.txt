@@ -1,0 +1,933 @@
+Requisitos:
+
+Visual code 
+Plugins (opcionais)
+Atom One Dark Theme
+> file>preferences>settings> text editor > font > font weight (edit in setting.json)
+
+Auto Rename Tag
+Material Icon Theme
+
+
+NODE.js
+>>https://nodejs.org/en/download/
+npm
+
+>>ir no  powershell do windows (EM ADM)
+Get-ExecutionPolicy
+Mudar de Restricted para Unrestricted
+Set-ExecutionPolicy Unrestricted > Sim para Todos
+
+npm install -g @angular/cli
+
+ng version deve retornar a versao Angular CLI
+
+NO VISUAL CODE EM TERMINAL
+
+#1 - Instala um novo Projeto
+ > ng new 'nome_projeto'
+ >> ativa as rotas
+ >> escolha scss, evolução do css
+ 
+#2 - Inicia o server
+ > ng serve
+ > ng serve --open //inicia o server abrindo o navegador
+ > ng serve --open --port 4201 // inicia o server angular em uma porta diferente da padrao
+
+#2.1
+ > limpar o app.component.html
+
+#3 - Adicinando o bootstrap no projeto (npm -> nuget packge managment) (ng-bootstrap/ng-bootstrap e ngx-bootstrap são concorrentes)
+ > ng add @ng-bootstrap/ng-bootstrap
+
+- Oficial: https://getbootstrap.com/docs/5.2/components/buttons/
+- angular: https://ng-bootstrap.github.io/#/components/accordion/examples
+
+Apos a instalação testar com um botão, para ver se esta reconhecendo...
+
+ajustar o angular.json para reconhecer os novos css, scripts e font awsome (se houver)
+EX:
+"builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/angular-academy",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/assets/css/style.css", 
+              "src/assets/fontawesome-free-6.1.1-web/css/all.min.css"
+            ],
+            "scripts": []
+          },
+	  
+
+#3.1
+com base no template html, se houver, copiar e adaptar (css, imgs, fonts, scripts)
+
+#4 - Criando um modulo (são tipos organizadores, como se fosse pastas do windows
+ > ng g m NOME-MODULO
+ > ng g m NOME-MODULO --routing (ja cria o modulo com a rota) para pasta shared (que é compartilhada no projeto) avaliar a necessidade de rota, geralmente nao precisa
+
+#5 - Criando um componente
+ >ng g c NOME-COMPONENT
+-ao criar o componente pode ser que seja necessario EXPORTAR, para isso vai no modulo pai do componente, e adicionar um export, e o nome do componente.
+Ex:
+
+@NgModule({
+  declarations: [
+    CursosListComponent
+  ],
+  imports: [
+    CommonModule,
+    CursosRoutingModule
+  ],
+  exports: [						<----------
+    CursosListComponent					<----------
+  ]							<----------
+
+})
+
+Verificar tbm se foi implementado o OnInit (implements OnInit)
+Ex: 
+=============================================================================
+import { Component, OnInit } from '@angular/core';		<--------------
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit{			<--------------
+
+  constructor() {
+    
+  }
+
+  ngOnInit(): void{
+
+  }
+  
+}
+
+
+}
+=============================================================================
+#6
+> Definir no layout onde sera carregado as paginas, para que não seja necessario atualizar tudo na pagina, e esse local dever ser informado a tag
+<router-outlet>
+
+#6.1 - a tag <router-outlet> é onde é carregado as paginas que esta com exports nos module.ts de acordo com a configuração na constante de routes;
+Exemplo de um layout com menu lateral esquerdo, onde os conteudos são apresentados o lado direito.
+Já sendo apresentados na tag <router-outlet>
+
+Ex: app.component.html
+===================================================================================================
+<div class="container-fluid">
+
+  <div class="menu">
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html"><span class="fas fa-house"></span> Home</a></li>
+        <li><a href="turmas.html"><span class="fas fa-calendar-days"></span> Turmas</a></li>
+        <li><a href="cursos.html"><span class="fas fa-code"></span> Cursos</a></li>
+        <li><a href="professores.html"><span class="fas fa-trophy"></span> Professores</a></li>
+        <!-- <li><a href="alunos.html"><span class="fas fa-user"></span> Alunos</a></li> -->
+        <li><a href="fale-conosco.html"><span class="fas fa-address-book"></span> Fale conosco</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>
+
+===================================================================================================
+#6.2
+ --Configurando para quando clicar no "href" do menu, o conteudo aparecer na tag router-outlet
+
+1º
+>> No arquivo #COMPONTENT#-routing.module.ts, devemos fazer a configuração de rota, dando o nome da rota, e qual componente sera referenciado
+para que seja exibido na tela
+
+EX: cursos-routing.module.ts
+===================================================================================================
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CursosListComponent } from './cursos-list/cursos-list.component';		<-------------
+
+const routes: Routes = [
+  {path: 'cursos', component: CursosListComponent}					<-------------
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CursosRoutingModule { }
+
+===================================================================================================
+-- Nesse caso 'cursos' referencia CursoListCompoent.
+O import é feito de forma automatica, caso nao seja feito, inserir manualmente.
+
+-- Nesse momento a aplicação ja ira entender na url o caminho cursos
+EX:
+http://localhost:4200/cursos								<-------------
+ >> cursos-list works!
+
+>> Para que agora possamos navegar pelo menu da pagina principal, iremos utilizar a tag padrao do angular routerlink="cursos"
+ps. O href tambem funciona, porem pode ser necessario informar /cursos para funcionar.
+Ex:
+===================================================================================================
+<div class="container-fluid">
+
+  <div class="menu">
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html"><span class="fas fa-house"></span> Home</a></li>
+        <li><a href="turmas.html"><span class="fas fa-calendar-days"></span> Turmas</a></li>
+        <li><a routerLink="cursos"><span class="fas fa-code"></span> Cursos</a></li>				<-------------
+        <li><a href="professores.html"><span class="fas fa-trophy"></span> Professores</a></li>
+        <!-- <li><a href="alunos.html"><span class="fas fa-user"></span> Alunos</a></li> -->
+        <li><a href="fale-conosco.html"><span class="fas fa-address-book"></span> Fale conosco</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <router-outlet></router-outlet>
+  
+</div>
+===================================================================================================
+
+Podemos informar a tag routerLinkActive para que quando a pagina estiver no conteudo, o menu fique com um estilo diferente.
+Ex:
+
+<li><a routerLink="cursos" routerLinkActive="active"><span class="fas fa-code"></span> Cursos</a></li>				<-------------
+
+#6.3 Variaveis no .ts
+- Ao declarar variaveis no typescript e tipar ela, pode ser que o angular fique reclamando a falta da sua inicialização.
+- Para resolver isso incluimos no tsconfig.json a configuração: 
+"compilerOptions":{
+xxx:xxx,
+"strictPropertyInitialization": false,
+xxx:xxx,
+}
+
+-- Criacao de variaveis
+title: string = 'valor'
+let title = 'valor' (let é o tipo equivalente a var) ... o tipo var não é mais usado com frequencia, o novo padrao é 'let'
+const title = 'valor' (variavel constante)
+
+-- para exibir o valor da variavel no html usamos a interpolação <img src = {{ title }} alt="">
+ou podemos utilizar tambem o property bind EX. <img [src]="title" alt="">
+
+
+Ex:
+============================================================================
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit{
+
+  title: string 
+
+  constructor() {
+    
+  }
+
+  ngOnInit(): void{
+    this.title = 'Angular Academy'
+
+    let title = 'variavel let'
+
+    console.log('this.title', this.title)
+    console.log('variavel let title', title)
+  }
+  
+}
+============================================================================
+
+#6.4  Evento Click Botao
+
+-html
+<button class="btn btn-primary" (click)="exibirTitle()">Exibir minha variael</button>
+
+-ts
+exibirTitle(){
+    console.log(this.title)
+     
+  }
+
+
+#7 - Base de dados (mock) via json (para testar front-end como se fosse uma API Respondendo)
+> npm install -g json-server
+
+ -- criar na raiz do projeto um arquivo ex: db.json e colocar uma estrutura igual de tabela em json
+ Ex: {
+  "cursos": [
+    {
+      "id": 1,
+      "nome": "Angular",
+      "thumb": "assets/images/curso-angular-logo.png",
+      "cargaHoraria": "40h",
+      "duracao": "10 semanas",
+      "valor": "R$ 3.850,00",
+      "dificuldade": 4,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    }]
+	}
+
+ -- apos isso, podemos inserir o seletor na pagina html que queremos ver o componente aparecendo.
+
+#8 - MODEL no angular
+- podemos criar nossos proprios tipos de dados no angular
+- Como exemplo, utilizando o componete cursos, ja criado anteriormente.
+-- Dentro de cursos criamos uma pasta "shared", essa pasta sera responsavel por guardar nossos models que serão compartilhados
+por todo nosso modulo de cursos.
+--- Dentro de shared vamos criar um novo arquivo "cursos.model.ts"
+Ex do arquivo model:
+=====================================================================
+export interface Curso{
+    nome: string,
+    thumb: string
+    //dificuldade: number,
+    //disponibilidade: boolean
+}
+=====================================================================
+
+#8.1 - LOOP NO HTML
+=====================================================================================
+<div class="content">
+  
+    <a href="cursos-form.html" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Novo Curso</a>
+    <h1><span class="fas fa-code"></span> Nosso <span class="active">Cursos</span></h1>
+
+    <div *ngFor="let curso of cursos" class="card">							<----------------
+      <!-- <div class="delete-confirm">
+        <p>Tem certeza?</p>
+        <button class="btn btn-light">Excluir</button>
+        <button class="btn btn-outline-light">Cancelar</button>
+      </div> -->
+      <div class="adm">
+        <a href="#" class="edit"><span class="fas fa-pen-to-square"></span></a>
+        <a href="#" class="delete"><span class="far fa-trash-can"></span></a>
+      </div>
+      <div class="card-body">
+        <img src="{{ curso.thumb }}" alt="">
+      </div>
+      <h5 class="card-title">{{ curso.nome }}</h5>
+      <div class="d-grid">
+        <a href="cursos-single.html" class="btn btn-dark btn-primary-hover">Visualizar</a>
+      </div>
+    </div>
+
+  </div>
+=====================================================================================
+No TypeScript:
+import { Component, OnInit } from '@angular/core';
+import { Curso } from '../shared/cursos.model';
+
+@Component({
+  selector: 'app-cursos-list',
+  templateUrl: './cursos-list.component.html',
+  styleUrls: ['./cursos-list.component.scss']
+})
+export class CursosListComponent implements OnInit {
+
+  cursos: Curso[] // apos ter criado o model de Curso em shared e importado aqui no escopo, mudamos o tipo any para o tipo Curso
+
+  constructor() {
+    
+  }
+
+  ngOnInit(): void {
+      this.getCursos()
+  }
+
+  getCursos(){
+    this.cursos = [
+      { 
+        nome: 'Angular', 
+        thumb:'assets/images/curso-angular-logo.png'
+      },
+      { 
+        nome: 'Html 5', 
+        thumb:'assets/images/curso-html5-logo.png'
+      }
+    ]  
+
+    console.log(this.cursos)
+  }
+}
+===============================================================================================
+
+#9 criando um service (responsavel pela comunicação com a api do backend)
+-- O seviço é por modulo... logo o padrao é criar uma pasta shared relacionada com o modulo, para ser criado o serviço dentro dela.
+
+> ng g s cursos/shared/cursos
+
+-- cria o serviço que sera responsavel pela comunicacao desse modulo.
+Ex: Apos criacao: já inserimos um metodo mock para retornar um json, no que seria o retorno da api backend
+===================================================
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CursosService {
+
+  constructor() { }
+
+  getAllCursos(){
+
+    return [
+      { 
+        nome: 'Angular', 
+        thumb:'assets/images/curso-angular-logo.png'
+      },
+      { 
+        nome: 'Html 5', 
+        thumb:'assets/images/curso-html5-logo.png'
+      }
+    ]
+  }
+}
+
+===================================================
+
+>>>> Parao componente consumir o serviço é necessario fazer a injeção de dependencia...
+No construtor do cursos-list.component.ts fazemos a injeção de dependencia do serviço que acabamos de criar.
+=============================
+import { Component, OnInit } from '@angular/core';
+import { Curso } from '../shared/cursos.model';
+import { CursosService } from '../shared/cursos.service';
+
+@Component({
+  selector: 'app-cursos-list',
+  templateUrl: './cursos-list.component.html',
+  styleUrls: ['./cursos-list.component.scss']
+})
+export class CursosListComponent implements OnInit {
+
+  cursos: Curso[] // apos ter criado o model de Curso em shared e importado aqui no escopo, mudamos o tipo any para o tipo Curso
+
+  constructor(
+    private service: CursosService				<-------------------- injeção de dependencia do serviço
+  ) { }
+
+  ngOnInit(): void {
+      this.getCursos()
+  }
+
+  getCursos(){
+    
+    this.cursos = this.service.getAllCursos()
+
+    //console.log(this.cursos)
+  }
+}
+
+=============================
+
+#10 - Subir o json-server para utilizalo como se fosse uma API respondendo
+
+> npm install -g json-server                   <--------------------- instalando o json server para utilizar dados mockados
+
+-- no mesmo diretorio que fica o package.json, vamos criar um arquivo chamado db.json
+-- no arquivo deve contar a estrutura do que sera retornado da api
+EX:
+{
+  "cursos": [
+    {
+      "id": 1,
+      "nome": "Angular",
+      "thumb": "assets/images/curso-angular-logo.png",
+      "cargaHoraria": "40h",
+      "duracao": "10 semanas",
+      "valor": "R$ 3.850,00",
+      "dificuldade": 4,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    },
+    {
+      "id": 2,
+      "nome": "HTML 5*",
+      "thumb": "assets/images/curso-html5-logo.png",
+      "cargaHoraria": "20h",
+      "duracao": "5 semanas",
+      "valor": "R$ 1.200,00",
+      "dificuldade": 2,
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    }
+  ]
+}
+
+-- startando o servidor mock
+> json-server --watch db.json (ele ficara executando em segundo plano por um link no navegador, geralmente na porta localhost:3000/cursos/1)
+
+++++++++++++++++++++++++++++++++++++++++++++
+IR NO APP.MODULE.TS
+
+import { HttpClientModule } from '@angular/common/http';
+
+> importar o HttpClientModule
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule, 
+    CursosModule, 
+    ProfessoresModule,
+    TurmasModule,
+    HttpClientModule				<---------------------
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+++++++++++++++++++++++++++++++++++++++++++++
+
+Fazer a injeção de dependencia do HttpClientModule nos serviços, junto do caminho da api.
+Ex:
+import { HttpClient } from '@angular/common/http';   	<--------------------- import do http
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CursosService {
+
+  API = 'http://localhost:3000/'
+
+  constructor( 
+    private http: HttpClient		<-------------------- injeção de dependencia
+  ) { }
+
+  getAllCursos(){
+
+  }
+}
+
+=============================
+> Incluir o path da API no environments.ts para que nao fique sendo declarado individualmente em cada serviço.
+Criar diretorio environments, no mesmo nivel do main.ts
+dentro do diretorio incluir os arquivos: environment.prod.ts e environment.ts
+
+> Dentro de environments informar as variaveis
+Ex:
+
+export const environment = {
+    production: false,
+	apiUrl: 'http://localhost:3000'
+}
+
+Ex: environment.prod.ts
+
+export const environment = {
+    production: true,
+	apiUrl: 'http://servicodeapi/api'
+}
+
++++++++++++++++++++++++++
+alterando os serviços para:
+import { environment } from 'src/environments/environment';
+
+API = environment.apiUrl
+
+#10.1 - ADICIONANDO SPIN
+criar o modulo shared (a nivel de projeto)
+> ng g m shared
+-- exportar o modulo para que possa ser usado nos demais modulos do projeto.
+ ,exports: [ // outros modulos e componentes podem usar esse componente
+    SpinComponent
+  ]
+
+criar o componente
+> ng g c shared/spin
+
+
+
+-Alterar o html para exibir a imagem gif e css caso necessario
+Ex: Html
+<div class="spin">
+    <img src="assets/images/loading.gif" alt="">
+</div>
+
+Ex: Css (redondo)
+.spin {
+    background: rgba(255, 255, 255, .9);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 45%;
+    z-index: 999999;
+    left: 50%;
+    box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, .2);
+    img {
+      mix-blend-mode: multiply; 
+    }
+  }
+  
+adicionar o modulo shared no app.module
+adicionar o modulo shared nos modulos que chamaram o spin (ex. cursos, professor, turmas etc...)
+Ex: 
+  imports: [
+    CommonModule,
+    SharedModule,				<-------------------------
+    CursosRoutingModule
+  ],
+  
+
+
+
+# 11  (Revisao antes de formularios) 
+Ordem de criacao 
+Ex: (g- generate / m - module / c - component / s - service )
+1- ng g m NOME-MODULO
+2- ng g c NOME-COMPONENT
+3- ng g s CAMINHO/NOME-SERVICE
+4- nao esquecer de adicionar o modulo no "Imports" do app.module
+
+Ordem criacao de nova pagina no projeto bf academy
+- module
+- componente 
+  >> ng g c cursos/cursos-single
+
+- template 
+  >>(copiado html de um template para alteracao)
+
+- rota 
+  >> ( cursos-routing.module.ts {path:'cursos/:id', component: CursosSingleComponent})
+- link 
+  >> ( <a routerLink="{{ curso.id }}" class="btn btn-dark btn-primary-hover">Visualizar</a>)
+- service
+  >> criar metodos no service para pegar por id, ou por nome etc..
+- ts (type script)
+- html ( ajustar a interpolacao com as variaveis vinda do type script service)
+
+#12  CRIACAO DE NOVO FORMULARIO NO ANGULAR
+
+- se nao houver modulo, criar o modulo
+
+- criacao do componente (ng g c curos/cursos-form)
+
+IMPORTACAO DO FORM NO #MODULOQUEESTAUSANDO#.MODULE
+- cursos.module.ts
+>> ReactiveFormsModule
+- no modulo onde ira utilizar o formulario - Ex. cursos.modulo.ts -  ( importacao do formulario reactiveformmodule)
+>> import { ReactiveFormsModule } from '@angular/forms';   > imports  ReactiveFormsModule,
+### não esquecer de fazer o import do ReactiveFormsModule no modulo do componente que esta sendo criado os formularios
+Ex:
+==================================================================================================================
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { CursosRoutingModule } from './cursos-routing.module';
+import { CursosListComponent } from './cursos-list/cursos-list.component';
+import { CursosSingleComponent } from './cursos-single/cursos-single.component';
+import { SharedModule } from '../shared/shared.module';
+import { CursosFormComponent } from './cursos-form/cursos-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+@NgModule({
+  declarations: [
+    CursosListComponent,
+    CursosSingleComponent,
+    CursosFormComponent
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    CursosRoutingModule
+  ],
+  exports: [
+    CursosListComponent
+  ]
+
+})
+export class CursosModule { }
+==================================================================================================================
+
+
+- No .ts do componente form, criar uma variavel do tipo FormGroup (formulario: FormGroup)
+Ex:
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';				<---------------
+
+@Component({
+  selector: 'app-cursos-form',
+  templateUrl: './cursos-form.component.html',
+  styleUrls: ['./cursos-form.component.scss']
+})
+export class CursosFormComponent implements OnInit {
+
+  formulario: FormGroup									<---------------
+  constructor() {
+    
+    
+  }
+
+  ngOnInit(): void {
+      
+  }
+
+}
+
+- fazer a injeção de dependencia FormBuilder (Ex: contructor ( private fb: FormBuilder) {} )
+Ex:
+  constructor(
+    private fb: FormBuilder				<-------------------
+  ) {   }
+
+  
+- criar um metodo fora do ngOnInit para ficar organizado e iniciar o formulario
+	- nesse metodo atribui o formulario (formGroup) recebendo o fb (FormBuilder).
+----------------
+- this.formulario = this.fb.group({CAMPOS})
+----------------	
+Ex:	
+==================================
+  iniciaForm(){
+    this.formulario = this.fb.group({
+      id: [],
+      nome: ["campo ja vem preenchido"],
+      thumb: [],
+      cargaHoraria: [],
+      duracao: [],
+      valor: [],
+      dificuldade: [],
+      descricao: []
+    })
+  }
+ ================================
+
+- HTML
+> na tag do forumulario <form> adicionar o formGroup Ex: <form [formGroup] = "formulario">
+Ex:
+===========================================================================================================================
+<div class="content">
+    <h1><span class="fas fa-code"></span> CADASTRANDO/EDITANDO Curso de <span class="active">Angular</span></h1>
+
+    <form [formGroup] = "formulario">												<-------------------------
+      <div class="row">
+        <div class="col-md-4">
+          <label>Nome</label>
+          <input type="text" name="" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-8">
+          <label>URL da thumb</label>
+          <input type="text" name="" class="form-control form-control-sm" />
+        </div>
+		....
+	</form>
+	<form [formGroup] = "news">
+	  ...
+	</form>
+</div>
+	
+// NAO HÁ LIMITE DE FORMULARIO NA TELA...
+===========================================================================================================================
+>>> Alterar as tags html name para formControlName (pois o angular entende formControlName)
+Ex:
+ <div class="col-md-4">
+          <label>Nome</label>
+          <input type="text" formControlName="nome" class="form-control form-control-sm" />
+ </div>
+===========================================================================================================================
+
+# 12.1 (Testando o onSubmit() no botao salvar)
+Ex: Html
+<div class="row">
+	<div class="col-md-12">
+	  <button (click)="onSubmit()" class="btn btn-success"><span class="fas fa-floppy-disk"></span> Salvar</button>
+	  <button class="btn btn-danger"><span class="fas fa-times"></span> Cancelar</button>
+	</div>
+</div>
+
+Ex: Ts.
+--metodo
+onSubmit(){
+    console.log('Enviou')
+    console.log('Form:', this.formulario.value )
+  }
+
+
+
+#12.2 (chamando a api de gravacao ao salvar)
+> Component .ts
+Ex:
+  constructor(
+    private fb: FormBuilder,
+    private service: CursosService				<----------------- injecao de dependencia
+  ) {   }
+  
+  
+onSubmit(){
+    console.log('Enviou')
+    console.log('Form:', this.formulario.value )
+    let form = this.formulario.value
+    this.service.createCurso(form).subscribe({
+      next: () => {}
+    })
+  }
+  
+> Service .ts
+...
+createCurso(obj: Curso){
+    //verificar como a api espera receber os parametros
+    return this.http.post(`${this.API}/cursos/`, obj).pipe(take(1))
+  }
+...
+
+
+#####
+> Validacao de texto se contem determinado caractere no final var.includes(text.slice(-4))
+
+##### TOASTR ###### Balão de informaçoes
+Para mensagens de balaozinho na tela, pode ser usado a biblioteca > toastr
+>npm install ngx-toastr --save
+
+-apos a instalação é necessario fazer o import no modulo principal
+Ex:
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+ imports: [
+    BrowserModule,
+    ...,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      closeButton: true, // documentacao do componente https://www.npmjs.com/package/ngx-toastr
+      timeOut: 3000,
+      positionClass: 'toast-top-center'
+    }),
+
+no componente que for utilizar, fazer a injeção de dependencia
+Ex: 
+constructor( private fb: FormBuilder,
+      private service: CursosService,
+      private rota : ActivatedRoute,
+      private toastr: ToastrService    <<--------------
+    ) {} // Injetando o FormBuilder, serviço de curso, e a rota ativa para pegar parametros da url
+
+A chamada pode ser usada nos callbacks
+Ex:
+  onSubmit(){
+    this.spin = true
+    // console.log('FORM: ', this.formulario.value)
+    let form = this.formulario.value
+
+    console.log("Editando/cadastrando")
+    //
+    this.service.save(form).subscribe({
+      // CALLBACKS
+      next: (res: any) => {
+        //NEXT PEGA A RESPOSTA DO QUE A API RETORNOU
+        console.log('Retorno resultado ')
+      },
+      error: (b) => {
+        // ERROR exibe algo quando ocorre algum erro
+        this.toastr.error('Erro: '+ b.message,'Erro!')
+        console.log('erro ')
+        this.spin = false
+      },
+      complete: () => {
+        // COMPLETE, diz o que devera acontecer quando concluir a requisição
+        this.spin = false
+        console.log('complete  curso')
+        this.toastr.success('Informações gravadas com sucesso!','Sucesso!')          <<----------------
+      }
+    })
+####################################
+#########CRIANDO UM MODAL
+declarar uma variavel Modal : NgbModalRef
+
+fazer uma injeção dependencia, modalService: NgbModal
+
+fazer um metodo para abrir o modalService
+> openModal(){
+	this.modal = this.modalService.open(###componente_que_vai_abrir###, ###opcoes_personalizar_o_modal###)
+	this.modal = this.modalService.open(TurmasFormComponent )
+}
+
+
+##################### ROUTE GUARD - PARA LOGIN ############
+> ng g g login/shared/auth                 (-- ng -generate -guard ....)
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-ATALHOS NO VSCODE
+>File>Preferences>Configure User Snipets
+
+Atalho para typescript no vscode
+
+>>>>>Criando Atalho (fform)
+>File>Preferences>Configure User Snipets
+Procurar por typescript para ts, ou html para .html.
+
+Exemplo de criacao:
+{
+	// Place your snippets for typescript here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"fform":{"prefix": "fform","body": ["// VAR - formulario: FormGroup",
+										"// CONSTRUCTOR - private fb: FormBuilder,",
+										"// No HTML cria o <form [FormGroup] = \"formulario\"",
+										"// No HTML adiciona o formControlName nos campos",
+										"this.formulario = this.fb.group({",
+											"id: [],",
+											"nome: [],",
+										"})"
+										]}
+}
+
+Atalho para HTML no vscode
+
+>>>>>Criando Atalho (bbtn) e botao com click (bctn)
+>File>Preferences>Configure User Snipets
+Procurar por typescript para ts, ou html para .html.
+
+"bbtn" : { "prefix":"bbtn", "body":[ "<button class=\"btn btn-primary\">$1</button>" ]},
+"bctn" : { "prefix":"bctn", "body":[ "<button class=\"btn btn-primary\" (click)=\"$1\" >$2</button>" ]}

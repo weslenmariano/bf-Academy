@@ -16,6 +16,21 @@ export class TurmasListComponent implements OnInit {
   ) {  }
 
   ngOnInit(): void {
-      this.turmas = this.service.getAllTurmas();
+      //this.turmas = this.service.getAllTurmas();
+      this.getTurmas()
+  }
+
+  getTurmas(){
+    this.service.getAllTurmas().subscribe({
+      next: (resposta: Turma[]) => {
+        console.log('Retorno API', resposta)
+        this.turmas = resposta
+      },
+      error: () => {},
+      complete: () => {}
+    })
+    //this.professores = this.service.getAllProfessores()
+    //console.log(this.cursos)
+
   }
 }

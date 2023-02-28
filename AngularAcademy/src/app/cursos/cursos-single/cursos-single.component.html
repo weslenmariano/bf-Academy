@@ -1,0 +1,28 @@
+<div class="content">
+    <h1><span class="fas fa-code"></span> Curso de <span class="active">{{ cursoSelecionado?.nome }}</span></h1>
+
+    <a href="cursos-single.html" class="btn btn-dark btn-lg btn-primary-hover mb-3"><span class="fas fa-calendar-days"></span> <span class="fw-bold">05/10</span> | Próxima turma de Angular 14</a>
+    
+    <p>{{ cursoSelecionado?.descricao }}</p>
+
+    <table class="table table-striped table-hover mt-3">
+      <thead>
+        <tr>
+          <th>Carga horária</th>
+          <th>Duração</th>
+          <th>Valor</th>
+          <th>Dificuldade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ cursoSelecionado?.cargaHoraria }}</td>
+          <td>{{ cursoSelecionado?.duracao }}</td>
+          <td>{{ cursoSelecionado?.valor }}</td>
+          <td>
+            <span class="badge text-bg-danger">{{ cursoSelecionado?.dificuldade }} / 5</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

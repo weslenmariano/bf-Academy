@@ -20,8 +20,15 @@ export class ProfessoresListComponent implements OnInit{
   }
 
   getProfessores(){
-    
-    this.professores = this.service.getAllProfessores()
+    this.service.getAllProfessores().subscribe({
+      next: (resposta: Professor[]) => {
+        console.log('Retorno API', resposta)
+        this.professores = resposta
+      },
+      error: () => {},
+      complete: () => {}
+    })
+    //this.professores = this.service.getAllProfessores()
     //console.log(this.cursos)
 
   }

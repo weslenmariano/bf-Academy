@@ -9,7 +9,9 @@ import { CursosService } from '../shared/cursos.service';
 })
 export class CursosListComponent implements OnInit {
 
-  cursos: Curso[] // apos ter criado o model de Curso em shared e importado aqui no escopo, mudamos o tipo any para o tipo Curso
+  cursos: Curso[] 
+  // apos ter criado o model de Curso em shared e importado aqui no escopo, mudamos o tipo any para o tipo Curso
+  spin: boolean = false
 
   constructor(
     private service: CursosService
@@ -20,8 +22,18 @@ export class CursosListComponent implements OnInit {
   }
 
   getCursos(){
-    
-    this.cursos = this.service.getAllCursos()
+    this.spin = true
+    this.service.getAllCursos().subscribe({
+      next: (resposta) => {
+        console.log('Retorno API', resposta)
+        this.cursos = resposta
+      }, // pegando a resposta que a api retornoou
+      error: () => {}, // erro que pode acontecer na api
+      complete: () => {
+        this.spin = false
+      } // complete o que devera acontecer quando concluir a requisicao
+    })
+    //this.cursos = this.service.getAllCursos()
     //console.log(this.cursos)
   }
 }
