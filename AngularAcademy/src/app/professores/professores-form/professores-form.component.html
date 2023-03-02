@@ -1,0 +1,43 @@
+<app-spin *ngIf="spin"></app-spin>
+<div class="content">
+    <h1 *ngIf="!professorId"><span class="fas fa-code"></span> CADASTRANDO Professor</h1>
+    <h1 *ngIf="professorId  "><span class="fas fa-code"></span> EDITANDO Professor <span class="active">{{ professorSelecionado?.nome }}</span></h1>
+
+    <form [formGroup] = "formulario">
+      <div class="row">
+        <div class="col-md-4">
+          <label>Nome</label>
+          <input type="text" formControlName="nome" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-3">
+          <label>País</label>
+          <input type="text" formControlName="origem" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-5">
+          <label>Especialidades</label>
+          <input type="text" formControlName="skills" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-8">
+          <label>URL da thumb</label>
+          <input type="text" formControlName="thumb" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-8">
+          <label>URL da bandeira</label>
+          <input type="text" formControlName="bandeira" class="form-control form-control-sm" />
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <label>Descrição</label>
+          <textarea formControlName="descricao" class="form-control form-control-sm" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button (click)="onSubmit()" class="btn btn-success"><span class="fas fa-floppy-disk"></span> Salvar</button>
+          <button class="btn btn-danger"><span class="fas fa-times"></span> Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </div>

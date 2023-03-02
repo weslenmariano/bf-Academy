@@ -479,7 +479,7 @@ EX:
   ]
 }
 
--- startando o servidor mock
+-- STARTANDO SERVIDOR MOCK JSON
 > json-server --watch db.json (ele ficara executando em segundo plano por um link no navegador, geralmente na porta localhost:3000/cursos/1)
 
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -758,7 +758,7 @@ Ex:
 Ex:
  <div class="col-md-4">
           <label>Nome</label>
-          <input type="text" formControlName="nome" class="form-control form-control-sm" />
+          <input type="text" formControlName="nome" class="form-control form-control-sm" />			<---------------------
  </div>
 ===========================================================================================================================
 
@@ -806,6 +806,92 @@ createCurso(obj: Curso){
   }
 ...
 
+#12.3 (REALIZANDO O PATCH DOS VALORES NO FORMULARIO)
+Ex:
+
+getCurso(){
+    this.service.getSingleCurso(this.cursoId).subscribe({
+      next: (res: Curso) => {
+        this.cursoSelecionado = res
+        console.log('*** res:', res) // tmp
+        this.formulario.patchValue(res)				<----------
+      },
+      error: () => {},
+      complete: () => {}
+    })
+  }
+  
+OU
+
+/* // ou de forma individual por campo
+this.formulario.patchValue({
+  duracao: "1 semana",
+  dificuldade: 2,
+  valor: "R$ 4.500,00"
+  ...
+})
+// ou de forma individual por campo
+this.formulario.patchValue({
+  duracao: res.duracao,
+  dificuldade: res.dificuldade,
+  valor: res.valor
+  ...
+})
+*/
+
+#12.4 (REALIZANDO O PUT DOS VALORES NA API)  
+EX: service
+===================================================
+getAllProfessores(){
+    return this.http.get<Professor[]>(`${this.API}/professores`)
+  }
+
+  // microserviço
+  getSingleProfessor(professorId:number){
+    return this.http.get<Professor>(`${this.API}/professores/${professorId}`).pipe(take(1)) // pipe(take(1)) faz a requisição apenas uma vez nã api
+  }
+
+  createProfessor(obj: Professor){
+    //verificar como a api espera receber os parametros
+    return this.http.post(`${this.API}/professores/`, obj).pipe(take(1))
+  }
+ editProfessor(obj: Professor){
+    //verificar como a api espera receber os parametros
+    return this.http.put<Professor>(`${this.API}/professores/${obj.id}`, obj).pipe(take(1))
+  }
+
+Ex: Componente .ts
+ onSubmit(){
+      this.spin = true
+      console.log('Enviou')
+      console.log('Form:', this.formulario )
+  
+      let form = this.formulario.value
+      if (this.professorId){
+        console.log('Editando')
+        this.service.editProfessor(form).subscribe({
+          next: () => {},
+          error: () => {},
+          complete: () => {
+            this.spin = false
+          }
+        })
+      }
+      else{
+        console.log('cadastrando')
+        this.service.createProfessor(form).subscribe({
+          next: (res: any) => {},
+          error: () => {},
+          complete: () => {
+            this.spin = false
+          }
+        })
+      }
+      
+    }
+
+
+===================================================
 
 #####
 > Validacao de texto se contem determinado caractere no final var.includes(text.slice(-4))

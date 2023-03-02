@@ -1,11 +1,17 @@
+<app-spin *ngIf="spin"></app-spin>
 <div class="content">
 
-    <a href="professores-form.html" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Novo Professor</a>
+    <a routerLink="novo" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Novo Professor</a>
     <h1><span class="fas fa-trophy"></span> Incríveis <span class="active">Professores</span></h1>
+
+    <div *ngIf="erro" class="alert alert-danger" role="alert">
+      Não foi possivel conectar na fonte de dados!
+      {{ erro }}
+      </div>
 
     <div *ngFor="let professor of professores" class="card">
       <div class="adm">
-        <a href="#" class="edit"><span class="fas fa-pen-to-square"></span></a>
+        <a routerLink="edit/{{ professor?.id }}" class="edit"><span class="fas fa-pen-to-square"></span></a>
         <a href="#" class="delete"><span class="far fa-trash-can"></span></a>
       </div>
       <div class="card-body">
@@ -14,7 +20,7 @@
       <h5 class="card-title">{{ professor.nome }}</h5>
       <p class="card-subtitle">{{ professor.skills }}</p>
       <div class="d-grid">
-        <a href="professores-single.html" class="btn btn-dark btn-primary-hover">Visualizar</a>
+        <a routerLink="{{ professor?.id }}" class="btn btn-dark btn-primary-hover">Visualizar</a>
       </div>
     </div>
 

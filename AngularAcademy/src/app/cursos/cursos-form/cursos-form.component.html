@@ -1,5 +1,12 @@
+<app-spin *ngIf="spin"></app-spin>
 <div class="content">
-    <h1><span class="fas fa-code"></span> CADASTRANDO/EDITANDO Curso de <span class="active">Angular</span></h1>
+    <h1 *ngIf="!cursoId"><span class="fas fa-code"></span> CADASTRANDO Curso</h1>
+    <h1 *ngIf="cursoId  "><span class="fas fa-code"></span> EDITANDO Curso de <span class="active">{{ cursoSelecionado?.nome }}</span></h1>
+
+    <div *ngIf="erro" class="alert alert-danger" role="alert">
+      Não foi possivel conectar na fonte de dados!
+      {{ erro }}
+    </div>
 
     <form [formGroup] = "formulario">
       <div class="row">

@@ -12,7 +12,7 @@ export class CursosListComponent implements OnInit {
   cursos: Curso[] 
   // apos ter criado o model de Curso em shared e importado aqui no escopo, mudamos o tipo any para o tipo Curso
   spin: boolean = false
-
+  erro: any
   constructor(
     private service: CursosService
   ) { }
@@ -28,7 +28,10 @@ export class CursosListComponent implements OnInit {
         console.log('Retorno API', resposta)
         this.cursos = resposta
       }, // pegando a resposta que a api retornoou
-      error: () => {}, // erro que pode acontecer na api
+      error: (erro) => {
+        this.spin = false
+        this.erro = erro.message
+      }, // erro que pode acontecer na api
       complete: () => {
         this.spin = false
       } // complete o que devera acontecer quando concluir a requisicao

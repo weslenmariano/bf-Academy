@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "nome": "Java EE",
+      "nome": "Java EE1",
       "thumb": "assets/images/curso-java-logo.png",
       "cargaHoraria": "120h",
       "duracao": "15 semanas",
@@ -69,6 +69,16 @@
       "valor": "5",
       "dificuldade": "6",
       "descricao": "7"
+    },
+    {
+      "id": 8,
+      "nome": "2",
+      "thumb": "3",
+      "cargaHoraria": "4",
+      "duracao": "5",
+      "valor": "6",
+      "dificuldade": "7",
+      "descricao": "8"
     }
   ],
   "professores": [
@@ -101,12 +111,12 @@
     },
     {
       "id": 4,
-      "nome": "Viola Davis",
+      "nome": "Viola Davis*",
       "thumb": "assets/images/professores/viola-davis.jpg",
-      "skills": "Angular, HTML, CSS",
-      "origem": "Americana",
+      "skills": "Angular, HTML, CSS *",
+      "origem": "Americana *",
       "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/us.png",
-      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+      "descricao": "*Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
     },
     {
       "id": 5,
@@ -119,12 +129,21 @@
     },
     {
       "id": 6,
-      "nome": "Glória Pires",
+      "nome": "Glória Pires*",
       "thumb": "assets/images/professores/gloria-pires.jpg",
-      "skills": "Docker",
-      "origem": "Brasileira",
+      "skills": "Docker*",
+      "origem": "Brasileira*",
       "bandeira": "https://www.sic-info.org/wp-content/uploads/2014/01/br.png",
-      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+      "descricao": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis. *"
+    },
+    {
+      "id": 7,
+      "nome": "1",
+      "thumb": "4",
+      "skills": "3",
+      "origem": "2",
+      "bandeira": "5",
+      "descricao": "6"
     }
   ],
   "turmas": [

@@ -7,7 +7,9 @@ import { CursosSingleComponent } from './cursos-single/cursos-single.component';
 const routes: Routes = [
   {path: 'cursos', component: CursosListComponent},
   {path: 'cursos/novo', component: CursosFormComponent},
+  {path: 'cursos/edit/:id', component: CursosFormComponent},
   {path: 'cursos/:id', component: CursosSingleComponent}
+  
   
 ];
 

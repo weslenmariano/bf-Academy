@@ -17,17 +17,36 @@ export class CursosService {
 
   // microserviço
   getAllCursos(){
-   return this.http.get<Curso[]>(`${this.API}/cursos`)
+   let url = `${this.API}/cursos`
+   return this.http.get<Curso[]>(url)
   }
 
   // microserviço
   getSingleCurso(cursoId:number){
-    return this.http.get<Curso>(`${this.API}/cursos/${cursoId}`).pipe(take(1)) // pipe(take(1)) faz a requisição apenas uma vez nã api
+    let url = `${this.API}/cursos/${cursoId}`
+    return this.http.get<Curso>(url).pipe(take(1)) // pipe(take(1)) faz a requisição apenas uma vez nã api
   }
 
   createCurso(obj: Curso){
+    let url = `${this.API}/cursos/`
     //verificar como a api espera receber os parametros
-    return this.http.post(`${this.API}/cursos/`, obj).pipe(take(1))
+    return this.http.post(url, obj).pipe(take(1))
+  }
+
+  editCurso(obj: Curso){
+    let url = `${this.API}/cursos/${obj.id}`
+    //verificar como a api espera receber os parametros
+    return this.http.put<Curso>(url, obj).pipe(take(1))
+  }
+
+  save(obj: Curso){
+    if(obj.id){
+      return this.editCurso(obj)
+    }
+    else{
+      return this.createCurso(obj)
+    }
+
   }
 
   /*
