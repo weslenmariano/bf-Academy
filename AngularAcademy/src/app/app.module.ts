@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,12 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     NgbModule, 
     HttpClientModule,
+    ToastrModule.forRoot({
+      closeButton: true, // documentacao do componente https://www.npmjs.com/package/ngx-toastr
+      timeOut: 3000,
+      positionClass: 'toast-top-center'
+    }),
+    BrowserAnimationsModule,
     SharedModule,
     CursosModule, 
     ProfessoresModule,

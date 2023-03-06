@@ -10,17 +10,19 @@
     </div>
 
     <div *ngFor="let curso of cursos" class="card">
-      <!-- <div class="delete-confirm">
+       
+      <div class="delete-confirm" *ngIf="curso.id == deleteConfirmId">
         <p>Tem certeza?</p>
-        <button class="btn btn-light">Excluir</button>
-        <button class="btn btn-outline-light">Cancelar</button>
-      </div> -->
+        <button (click)="remove(curso.id)" class="btn btn-light">Excluir</button>
+        <button (click)="deleteCancel()" class="btn btn-outline-light">Cancelar</button>
+      </div>
+
       <div class="adm">
-        <a routerLink="edit/{{ curso?.id }}" class="edit"><span class="fas fa-pen-to-square"></span></a>
-        <a href="#" class="delete"><span class="far fa-trash-can"></span></a>
+        <a routerLink="edit/{{ curso.id }}" class="edit"><span class="fas fa-pen-to-square"></span></a>
+        <a (click)="deleteConfirm(curso.id)" class="delete"><span class="far fa-trash-can"></span></a>
       </div>
       <div class="card-body">
-        <img src="{{ curso?.thumb }}" alt="">
+        <img src="{{ curso.thumb }}" alt="" *ngIf="imgExtensions.includes(curso.thumb.slice(-4))">
       </div>
       <h5 class="card-title">{{ curso?.nome }}</h5>
       <div class="d-grid">

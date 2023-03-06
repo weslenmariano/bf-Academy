@@ -52,33 +52,13 @@
     },
     {
       "id": 6,
-      "nome": "111",
-      "thumb": "assets/images/curso-wordpress-logo.png",
-      "cargaHoraria": "3",
-      "duracao": null,
-      "valor": "4",
+      "nome": "ja preenchido",
+      "thumb": "sdfsdfs",
+      "cargaHoraria": "sdfs",
+      "duracao": "sdfs",
+      "valor": "asdfas",
       "dificuldade": "5",
-      "descricao": "6"
-    },
-    {
-      "id": 7,
-      "nome": "1",
-      "thumb": "2",
-      "cargaHoraria": "3",
-      "duracao": "4",
-      "valor": "5",
-      "dificuldade": "6",
-      "descricao": "7"
-    },
-    {
-      "id": 8,
-      "nome": "2",
-      "thumb": "3",
-      "cargaHoraria": "4",
-      "duracao": "5",
-      "valor": "6",
-      "dificuldade": "7",
-      "descricao": "8"
+      "descricao": "sdfsd"
     }
   ],
   "professores": [
@@ -149,7 +129,7 @@
   "turmas": [
     {
       "id": 1,
-      "curso": "Angular",
+      "curso": 1,
       "inicio": "10/01/2022",
       "cargaHoraria": "40h",
       "duracao": "5 semanas",
@@ -158,7 +138,7 @@
     },
     {
       "id": 2,
-      "curso": "HTML 5",
+      "curso": 2,
       "inicio": "15/01/2022",
       "cargaHoraria": "20h",
       "duracao": "2 semanas",
@@ -167,7 +147,7 @@
     },
     {
       "id": 3,
-      "curso": "Angular",
+      "curso": 3,
       "inicio": "21/01/2022",
       "cargaHoraria": "40h",
       "duracao": "5 semanas",
@@ -176,7 +156,7 @@
     },
     {
       "id": 4,
-      "curso": "Java",
+      "curso": 1,
       "inicio": "03/02/2022",
       "cargaHoraria": "120h",
       "duracao": "12 semanas",

@@ -36,6 +36,16 @@ export class ProfessoresService {
     return this.http.put<Professor>(`${this.API}/professores/${obj.id}`, obj).pipe(take(1))
   }
 
+  save(obj: Professor){
+    if(obj.id){
+      return this.editProfessor(obj)
+    }
+    else{
+      return this.createProfessor(obj)
+    }
+
+  }
+
 
 /*
   getAllProfessoresOld(){

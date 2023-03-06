@@ -1,5 +1,5 @@
 <div class="content">
-    <a href="turmas-form.html" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Nova Turma</a>
+    <a routerLink="nova" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Nova Turma</a>
     <h1><span class="fas fa-calendar-days"></span> Próximas <span class="active">Turmas</span></h1>
 
     <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
@@ -34,17 +34,21 @@
       <tbody>
         <tr *ngFor="let turma of turmas">
           <td>
-            <a href="#">{{ turma.curso }}</a>
+            <a routerLink="/cursos/{{ turma.curso }}">{{ turma.cursoNome }}</a>
           </td>
-          <td>05/10/2022</td>
-          <td>80h</td>
-          <td>10 semanas</td>
-          <td>R$ 3.200,00</td>
+          <td>{{ turma.inicio }}</td>
+          <td>{{ turma.cargaHoraria }}</td>
+          <td>{{ turma.duracao }}</td>
+          <td>{{ turma.valor }}</td>
           <td>
-            <span class="badge text-bg-danger">4 / 5</span>
+            <span class="badge" [ngClass]="{'text-bg-success' : turma.dificuldade == 1 || turma.dificuldade == 2,
+                                            'text-bg-warning' : turma.dificuldade == 3,
+                                            'text-bg-danger' : turma.dificuldade == 4 || turma.dificuldade == 5
+                                            }"
+                                            >{{ turma.dificuldade }} / 5</span>
           </td>
           <td>
-            <button class="btn btn-primary btn-sm"><span class="fas fa-pen-to-square"></span></button>
+            <a routerLink="edit/{{ turma.id }}" class="btn btn-primary btn-sm"><span class="fas fa-pen-to-square"></span></a>
             <button class="btn btn-danger btn-sm"><span class="far fa-trash-can"></span></button>
           </td>
         </tr>

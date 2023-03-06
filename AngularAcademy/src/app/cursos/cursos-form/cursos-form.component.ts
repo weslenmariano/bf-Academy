@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Curso } from '../shared/cursos.model';
 import { CursosService } from '../shared/cursos.service';
 
@@ -16,11 +18,13 @@ export class CursosFormComponent implements OnInit {
   spin: boolean = false
   cursoSelecionado: Curso
   erro: any
+  subscriptions: Subscription[] = []
 
   constructor(
     private fb: FormBuilder,
     private service: CursosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private toastr: ToastrService
   ) {   }
 
   ngOnInit(): void {
@@ -28,9 +32,18 @@ export class CursosFormComponent implements OnInit {
     this.iniciaForm()
 
     if (this.cursoId){
-      this.getCurso()
+      this.subscriptions.push(this.getCurso())
+
     }
 
+  }
+
+  ngOnDestroy(){
+    if(this.subscriptions){
+      this.subscriptions.forEach( subs => {
+        subs?.unsubscribe()
+      })
+    }
   }
 
   iniciaForm(){
@@ -49,7 +62,7 @@ export class CursosFormComponent implements OnInit {
   }
 
   getCurso(){
-    this.service.getSingleCurso(this.cursoId).subscribe({
+    return this.service.getSingleCurso(this.cursoId).subscribe({
       next: (res: Curso) => {
         this.cursoSelecionado = res
         console.log('*** res:', res) // tmp
@@ -81,19 +94,25 @@ export class CursosFormComponent implements OnInit {
     console.log('Enviou')
     console.log('Form:', this.formulario )
 
+    this.subscriptions.push(this.salvar())
+   
+  }
+
+  salvar(){
     let form = this.formulario.value
     
-    this.service.save(form).subscribe({
+    return this.service.save(form).subscribe({
       next: (res: any) => {console.log("Retorno do servico")},
       error: (erro) => {
         console.log('Erro Encontrado: ', erro.message)
         this.spin = false
         this.erro = erro.message
+        this.toastr.error('Erro ao gravar informações: '+ erro.name,'Erro!')
       },
       complete: () => {
         this.spin = false
+        this.toastr.success('Informações gravadas com sucesso!','Sucesso!')
       }
     })
-   
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Professor } from '../shared/professores.model';
 import { ProfessoresService } from '../shared/professores.service';
 
@@ -12,18 +13,27 @@ export class ProfessoresListComponent implements OnInit{
   professores: Professor[] // apos ter criado o model de Curso em shared e importado aqui no escopo, mudamos o tipo any para o tipo Curso
   spin: boolean = false
   erro: any
+  subscriptions: Subscription[] = []
 
   constructor(
     private service: ProfessoresService
   ) { }
 
   ngOnInit(): void {
-      this.getProfessores()
+      this.subscriptions.push(this.getProfessores())
+  }
+
+  ngOnDestroy(){
+    if(this.subscriptions){
+      this.subscriptions.forEach( subs => {
+        subs?.unsubscribe()
+      })
+    }
   }
 
   getProfessores(){
     this.spin = true
-    this.service.getAllProfessores().subscribe({
+   return this.service.getAllProfessores().subscribe({
       next: (resposta: Professor[]) => {
         console.log('Retorno API', resposta)
         this.professores = resposta

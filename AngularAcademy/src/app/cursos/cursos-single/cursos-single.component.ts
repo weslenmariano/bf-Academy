@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Curso } from '../shared/cursos.model';
 import { CursosService } from '../shared/cursos.service';
 
@@ -12,6 +13,7 @@ export class CursosSingleComponent implements OnInit{
 
   cursoSelecionado: Curso
   cursoId: number
+  subscriptions: Subscription[] = []
 
   constructor(
     private service: CursosService,  // <-------- injetando o servico de curso service
@@ -20,11 +22,19 @@ export class CursosSingleComponent implements OnInit{
 
   ngOnInit(): void {
     this.cursoId =  Number(this.route.snapshot.paramMap.get('id')) // pega os parametros da url de acordo com o que esta configurado na rota do routing.module.ts
-    this.getCurso()  
+    this.subscriptions.push(this.getCurso())
+  }
+
+  ngOnDestroy(){
+    if(this.subscriptions){
+      this.subscriptions.forEach( subs => {
+        subs?.unsubscribe()
+      })
+    }
   }
 
   getCurso(){
-    this.service.getSingleCurso(this.cursoId).subscribe({
+   return this.service.getSingleCurso(this.cursoId).subscribe({
       next: (res: Curso) => {
         this.cursoSelecionado = res
         console.log('*** res:', res) // tmp

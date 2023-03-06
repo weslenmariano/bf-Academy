@@ -1,5 +1,7 @@
 export interface Turma{
-    curso: string,
+    id: number,
+    curso: number,
+    cursoNome: string,
     inicio?: string,
     cargaHoraria?: string,
     duracao?: string,
@@ -7,3 +9,10 @@ export interface Turma{
     dificuldade?: number
     //disponibilidade: boolean
 }
+/*
+export interface TurmaCurso {
+    cursoId: number,
+    cursoNome: string
+}
+
+*/

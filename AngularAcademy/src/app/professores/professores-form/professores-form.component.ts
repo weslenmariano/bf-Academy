@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Professor } from '../shared/professores.model';
 import { ProfessoresService } from '../shared/professores.service';
 
@@ -14,12 +16,15 @@ export class ProfessoresFormComponent implements OnInit{
   formulario: FormGroup
   professorId:number
   spin: boolean = false
+  erro: any
   professorSelecionado: Professor
+  subscriptions: Subscription[] = []
 
     constructor(
       private fb: FormBuilder,
     private service: ProfessoresService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
     ) {  }
 
     ngOnInit(): void {
@@ -30,6 +35,14 @@ export class ProfessoresFormComponent implements OnInit{
         this.getProfessor()
       }
   
+    }
+
+    ngOnDestroy(){
+      if(this.subscriptions){
+        this.subscriptions.forEach( subs => {
+          subs?.unsubscribe()
+        })
+      }
     }
   
     iniciaForm(){
@@ -80,28 +93,25 @@ export class ProfessoresFormComponent implements OnInit{
       console.log('Enviou')
       console.log('Form:', this.formulario )
   
-      let form = this.formulario.value
-      if (this.professorId){
-        console.log('Editando')
-        this.service.editProfessor(form).subscribe({
-          next: () => {},
-          error: () => {},
-          complete: () => {
-            this.spin = false
-          }
-        })
-      }
-      else{
-        console.log('cadastrando')
-        this.service.createProfessor(form).subscribe({
-          next: (res: any) => {},
-          error: () => {},
-          complete: () => {
-            this.spin = false
-          }
-        })
-      }
+      this.subscriptions.push(this.salvar())
       
+      
+    }
+
+    salvar(){
+      let form = this.formulario.value
+      
+      return this.service.save(form).subscribe({
+        next: (res: any) => {console.log("Retorno do servico")},
+        error: (erro) => {
+          console.log('Erro Encontrado: ', erro.message)
+          this.spin = false
+          this.erro = erro.message
+        },
+        complete: () => {
+          this.spin = false
+        }
+      })
     }
 
 }

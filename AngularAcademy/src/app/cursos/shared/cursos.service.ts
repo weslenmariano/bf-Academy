@@ -49,6 +49,11 @@ export class CursosService {
 
   }
 
+  deleteCurso(id: number){
+    let url = `${this.API}/cursos/${id}`
+    return this.http.delete(url).pipe(take(1)) // pipe(take(1)) faz a requisição apenas uma vez nã api
+  }
+
   /*
   getAllCursosOld(){
 
