@@ -745,6 +745,7 @@ Ex:
           <label>URL da thumb</label>
           <input type="text" name="" class="form-control form-control-sm" />
         </div>
+	  </div>
 		....
 	</form>
 	<form [formGroup] = "news">
@@ -990,17 +991,95 @@ Ex:
       }
     })
 ####################################
+#14 FILTRANDO DADOS COM TEMPLATE HASH
+Colocamos um id para o campo Ex. #cursoNome
+e quando for passar por parametro informamos o curso.value que ira pegar o valor do campo onde foi definindo o 'hash'
 
-#14 CRIANDO UM MODAL
-declarar uma variavel Modal : NgbModalRef
+Ex:
+<div class="input-group">
+  <input #cursoNome type="text" class="form-control form-control-sm" placeholder="Curso">					<<-----------------------------------
+  <button class="btn btn-secondary btn-sm" type="button" (click)="filtrar(cursoNome.value)"><span class="fas fa-filter"></span> Filtrar</button>  <<-----------------------------------
+</div>
+
+Filtrando com enter
+Ex:
+(keydown.enter)="filtrar(curso.value)" no campo input 
+<input #curso type="text" class="form-control form-control-sm" placeholder="Curso" (keydown.enter)="filtrar(curso.value)"> 		<<-------------------------
+
+####################################
+#15 CRIANDO UM MODAL
+declarar uma variavel modal : NgbModalRef
+modal : NgbModalRef
 
 fazer uma injeção dependencia, modalService: NgbModal
+
+constructor(
+    private service : TurmasService,
+    private cursosService: CursosService,
+    public modalService: NgbModal					<<---------------------
+  ) {  }
 
 fazer um metodo para abrir o modalService
 > openModal(){
 	this.modal = this.modalService.open(###componente_que_vai_abrir###, ###opcoes_personalizar_o_modal###)
 	this.modal = this.modalService.open(TurmasFormComponent )
 }
+
+>>> No compontente que foi aberto dentro do modal fazemos a injeção de dependencia do ngbActiveModal, para que possamos fechar o modal que esta aberto
+Ex: EM TurmasFormComponent (que o modal abriu)
+  constructor(
+    private fb: FormBuilder,
+    private service: TurmasService,
+    private cursosService: CursosService, 
+    private toastr: ToastrService,
+    public activeModal: NgbActiveModal					<<------------------
+    ) { }
+
+
+>>Component Instance informa que o modal esta recebendo dados externos para serem exibidos nele(modal)
+ this.modal.componentInstance.data = turma
+Ex:
+  openModal(turma?: Turma){
+  // Ex:	this.modal = this.modalService.open(TurmasFormComponent )
+    console.log("Turma", turma)
+    this.modal = this.modalService.open(TurmasFormComponent,{ size: "lg"})
+    this.modal.componentInstance.data = turma										<<---------------------
+  }
+ 
+///// Snipet
+"fform":{"prefix": "fform","body": ["// VAR - formulario: FormGroup",
+										"// CONSTRUCTOR - private fb: FormBuilder,",
+										"// No HTML cria o <form [FormGroup] = \"formulario\"",
+										"// No HTML adiciona o formControlName nos campos",
+										"iniciaForm(){",
+										"	this.formulario = this.fb.group({",
+										"		id: [],",
+										"		CAMPO1: [\"campo ja vem preenchido\"],",
+										"		CAMPO2: []",
+										"	})",
+										"}"
+										]},
+	"fmodal":{"prefix": "fmodal","body": ["// VAR - modal : NgbModalRef",									<<--------------------------------------
+										"// CONSTRUCTOR - public modalService: NgbModal,",
+										"openModal(){",
+										"// Ex:	this.modal = this.modalService.open(TurmasFormComponent, { size: \"lg\"} )",
+										"	this.modal = this.modalService.open(${1:Componente}, ${2:Estilo Modal/ classe})",
+										"}",
+										"// NO HTML - Estrutura do Modal basico",
+										" /* ",
+										"<div class=\"modal-header\">",
+										"  <h4 class=\"modal-title\" id=\"modal-basic-title\">Cadastrando/Editando Turma</h4>",
+										"  <button type=\"button\" class=\"btn-close\" aria-label=\"Close\" (click)=\"activeModal.close()\"></button>",
+										"</div>",
+										"<div class=\"modal-body\">",
+										"...",
+										"</div>",
+										"<div class=\"modal-footer\">",
+										"  <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"modal.close('Save click')\">Save</button>",
+										"</div>",
+										"*/"
+										]}
+
 
 
 ##################### ROUTE GUARD - PARA LOGIN ############

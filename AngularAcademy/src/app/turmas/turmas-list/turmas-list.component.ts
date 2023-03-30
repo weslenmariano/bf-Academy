@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Curso } from 'src/app/cursos/shared/cursos.model';
 import { CursosService } from 'src/app/cursos/shared/cursos.service';
 import { Turma } from '../shared/turmas.model';
 import { TurmasService } from '../shared/turmas.service';
+import { TurmasFormComponent } from '../turmas-form/turmas-form.component';
 
 @Component({
   selector: 'app-turmas-list',
@@ -15,16 +17,20 @@ export class TurmasListComponent implements OnInit {
   turmas : Turma[]
   subscriptions: Subscription[] = []
   cursos: Curso[]
+  turmasSemFiltro: Turma[]
+  modal: NgbModalRef
 
   constructor(
     private service : TurmasService,
-    private cursosService: CursosService
+    private cursosService: CursosService,
+    public modalService: NgbModal
   ) {  }
 
   ngOnInit(): void {
       //this.turmas = this.service.getAllTurmas();
       this.subscriptions.push(this.getTurmas())
       this.subscriptions.push(this.getCursos())
+      
   }
 
   ngOnDestroy(){
@@ -40,6 +46,7 @@ export class TurmasListComponent implements OnInit {
       next: (resposta: Turma[]) => {
         console.log('Retorno API', resposta)
         this.turmas = resposta
+        this.turmasSemFiltro = resposta
       },
       error: () => {},
       complete: () => {
@@ -57,6 +64,7 @@ export class TurmasListComponent implements OnInit {
       next: (resposta: Curso[]) => {
         console.log('Retorno API', resposta)
         this.cursos = resposta
+        
       }, // pegando a resposta que a api retornoou
       error: (erro) => {}, // erro que pode acontecer na api
       complete: () => {
@@ -69,4 +77,27 @@ export class TurmasListComponent implements OnInit {
     })
 
   }
+  filtrar(keyfilter : string){
+   this.zerarFiltro()
+   if(keyfilter){
+    this.turmas =  this.turmas.filter(f => f.cursoNome.toUpperCase().includes(keyfilter.toUpperCase()))
+   }
+  }
+
+  zerarFiltro(){
+    this.turmas = this.turmasSemFiltro 
+  }
+
+  // VAR - modal : NgbModalRef
+  // CONSTRUCTOR - public modalService: NgbModal,
+  openModal(turma?: Turma){
+  // Ex:	this.modal = this.modalService.open(TurmasFormComponent )
+    console.log("Turma", turma)
+    this.modal = this.modalService.open(TurmasFormComponent,{ size: "lg"})
+    this.modal.componentInstance.data = turma
+  }
+
+
+
+
 }

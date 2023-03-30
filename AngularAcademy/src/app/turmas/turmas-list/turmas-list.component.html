@@ -1,5 +1,5 @@
 <div class="content">
-    <a routerLink="nova" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Nova Turma</a>
+    <a (click)="openModal()" class="btn btn-primary float-end"><span class="fas fa-plus"></span> Nova Turma</a>
     <h1><span class="fas fa-calendar-days"></span> Próximas <span class="active">Turmas</span></h1>
 
     <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
@@ -13,8 +13,10 @@
     <div class="row mt-3">
       <div class="col-md-4">
         <div class="input-group">
-          <input type="text" class="form-control form-control-sm" placeholder="Curso">
-          <button class="btn btn-secondary btn-sm" type="button"><span class="fas fa-filter"></span> Filtrar</button>
+          <input #curso type="text" class="form-control form-control-sm" placeholder="Curso" (keydown.enter)="filtrar(curso.value)">
+          <button class="btn btn-secondary btn-sm" type="button" (click)="filtrar(curso.value)" ><span class="fas fa-filter"></span> Filtrar</button>
+          &nbsp;
+          <button class="btn btn-secondary btn-sm" type="button" (click)="zerarFiltro()" ><span class="fa-solid fa-broom"></span> Limpar</button>
         </div>
       </div>
     </div>
@@ -48,7 +50,8 @@
                                             >{{ turma.dificuldade }} / 5</span>
           </td>
           <td>
-            <a routerLink="edit/{{ turma.id }}" class="btn btn-primary btn-sm"><span class="fas fa-pen-to-square"></span></a>
+            <!-- <a routerLink="edit/{{ turma.id }}" class="btn btn-primary btn-sm"><span class="fas fa-pen-to-square"></span></a> -->
+            <a (click)="openModal(turma)" class="btn btn-primary btn-sm"><span class="fas fa-pen-to-square"></span></a>
             <button class="btn btn-danger btn-sm"><span class="far fa-trash-can"></span></button>
           </td>
         </tr>

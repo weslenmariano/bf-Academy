@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Curso } from 'src/app/cursos/shared/cursos.model';
@@ -23,7 +24,8 @@ export class TurmasFormComponent implements OnInit{
     private fb: FormBuilder,
     private service: TurmasService,
     private cursosService: CursosService, 
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public activeModal: NgbActiveModal
     ) { }
 
   ngOnInit(): void {
@@ -45,11 +47,11 @@ export class TurmasFormComponent implements OnInit{
     this.formulario = this.fb.group({
       id:[],
       curso:[],
-      inicio:[1],
-      cargaHoraria:[2],
-      duracao:[3],
-      valor:[4],
-      dificuldade:[5]
+      inicio:[],
+      cargaHoraria:[],
+      duracao:[],
+      valor:[],
+      dificuldade:[]
     })
   }
 
@@ -57,7 +59,7 @@ export class TurmasFormComponent implements OnInit{
   getCursos(){
     
     return this.cursosService.getAllCursos().subscribe({
-      next: (resposta) => {
+      next: (resposta : Curso[]) => {
         console.log('Retorno API', resposta)
         this.cursos = resposta
       }, // pegando a resposta que a api retornoou
@@ -69,9 +71,10 @@ export class TurmasFormComponent implements OnInit{
 
   changeCursos(){
     let cursoSelecionado: any = this.cursos.find(element => element.id == this.formulario.value.curso)
-    cursoSelecionado.cursoId = cursoSelecionado.id
+    cursoSelecionado.curso = cursoSelecionado.id
     cursoSelecionado.id = null
     this.formulario.patchValue(cursoSelecionado)
+    
   }
 
   onSubmit(){

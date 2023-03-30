@@ -53,12 +53,12 @@
     {
       "id": 6,
       "nome": "ja preenchido",
-      "thumb": "sdfsdfs",
-      "cargaHoraria": "sdfs",
-      "duracao": "sdfs",
-      "valor": "asdfas",
-      "dificuldade": "5",
-      "descricao": "sdfsd"
+      "thumb": "5",
+      "cargaHoraria": "11",
+      "duracao": "1",
+      "valor": "500",
+      "dificuldade": "2",
+      "descricao": "teste"
     }
   ],
   "professores": [
@@ -160,6 +160,24 @@
       "inicio": "03/02/2022",
       "cargaHoraria": "120h",
       "duracao": "12 semanas",
+      "valor": "R$ 4.900,00",
+      "dificuldade": 5
+    },
+    {
+      "id": 5,
+      "curso": 6,
+      "inicio": 1,
+      "cargaHoraria": "11",
+      "duracao": "1",
+      "valor": "500",
+      "dificuldade": "2"
+    },
+    {
+      "id": 6,
+      "curso": 3,
+      "inicio": "2",
+      "cargaHoraria": "120h",
+      "duracao": "15 semanas",
       "valor": "R$ 4.900,00",
       "dificuldade": 5
     }
