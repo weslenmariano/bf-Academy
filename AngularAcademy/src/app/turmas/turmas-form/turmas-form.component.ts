@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Curso } from 'src/app/cursos/shared/cursos.model';
 import { CursosService } from 'src/app/cursos/shared/cursos.service';
+import { Turma } from '../shared/turmas.model';
 import { TurmasService } from '../shared/turmas.service';
 
 @Component({
@@ -14,24 +15,31 @@ import { TurmasService } from '../shared/turmas.service';
 })
 export class TurmasFormComponent implements OnInit{
 
+  
+  @Input('turmaDados') turmaDados : Turma
   formulario: FormGroup
   cursos: Curso[]
   spin: boolean
   subscriptions: Subscription[] = []
   erro: string
 
+  
   constructor(
     private fb: FormBuilder,
     private service: TurmasService,
     private cursosService: CursosService, 
     private toastr: ToastrService,
     public activeModal: NgbActiveModal
+    
     ) { }
 
   ngOnInit(): void {
     this.iniciaForm()
     this.subscriptions.push(this.getCursos())
     
+    if(this.turmaDados){
+      this.editCurso(this.turmaDados)
+    }
   }
 
   ngOnDestroy(){
@@ -45,7 +53,7 @@ export class TurmasFormComponent implements OnInit{
   // CONSTRUCTOR - private fb: FormBuilder
   iniciaForm(){
     this.formulario = this.fb.group({
-      id:[],
+      id:[], 
       curso:[],
       inicio:[],
       cargaHoraria:[],
@@ -55,6 +63,10 @@ export class TurmasFormComponent implements OnInit{
     })
   }
 
+  editCurso(turma: Turma){
+    this.formulario.patchValue(turma)
+    this.formulario.controls['curso'].disable()
+  }
 
   getCursos(){
     
@@ -69,8 +81,9 @@ export class TurmasFormComponent implements OnInit{
 
   }
 
-  changeCursos(){
+  changeCursos(){  
     let cursoSelecionado: any = this.cursos.find(element => element.id == this.formulario.value.curso)
+    console.log("CursoSelecionado", cursoSelecionado)
     cursoSelecionado.curso = cursoSelecionado.id
     cursoSelecionado.id = null
     this.formulario.patchValue(cursoSelecionado)
@@ -87,8 +100,10 @@ export class TurmasFormComponent implements OnInit{
   }
 
   salvar(){
+    this.formulario.controls['curso'].enable()
     let form = this.formulario.value
-    
+    console.log("Fomulario para salvar", form)
+    //console.log("Curso selecionado", form.curso.value)
     return this.service.save(form).subscribe({
       next: (res: any) => {console.log("Retorno do servico")},
       error: (erro) => {
@@ -98,14 +113,13 @@ export class TurmasFormComponent implements OnInit{
         this.toastr.error('Erro ao gravar informações: '+ erro.name,'Erro!')
       },
       complete: () => {
+
         this.spin = false
         this.toastr.success('Informações gravadas com sucesso!','Sucesso!')
+        this.activeModal.dismiss('save')
+
       }
     })
   }
-
-
-
-
 
 }

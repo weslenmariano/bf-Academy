@@ -1037,7 +1037,41 @@ Ex: EM TurmasFormComponent (que o modal abriu)
 
 
 >>Component Instance informa que o modal esta recebendo dados externos para serem exibidos nele(modal)
- this.modal.componentInstance.data = turma
+ this.modal.componentInstance.turmaDados = turma // turma dados pode ser o nome que quiser				<<----------- passando dados para a tela que vai abrir dentro do modal
+ 
+>> No componente que vai abrir dentro do modal, vamos informar o input para que o componente fique esperando receber dados externos
+Ex:  (o parametro do @Input deve ser o mesmo nome informado no componentInstance... e o nome da variavel dever ser o mesmo nome
+@Input('turmaDados') turmaDados : Turma
+
+
+
+Realizando o fechamento do modal e trazendo os dados para a tela que o chamou
+- chando é chamado no html o activeModal.dismiss('xxxxx')tem que chamar o result.catch para receber o parametro passado
+- chando é chamado no html o activeModal.close('zzzzz')tem que chamar o result.then para receber o parametro passado
+
+HTML
+Ex.
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close('clooosssee')"></button>
+Ex.
+
+  openModal(turma?: Turma){
+  // Ex:	this.modal = this.modalService.open(TurmasFormComponent )
+    console.log("Turma", turma)
+    this.modal = this.modalService.open(TurmasFormComponent,{ size: "lg"})
+    this.modal.componentInstance.turmaDados = turma // turma dados pode ser o nome que quiser
+
+    this.modal.result.catch((retorno) => {																	<<----------------
+      console.log("Retorno do modal para essa tela", retorno)												<<----------------
+
+    })
+	this.modal.result.then((retorno) => {																	<<----------------
+      console.log("Retorno do modal para essa tela", retorno)												<<----------------
+
+    })
+
+  }
+
 Ex:
   openModal(turma?: Turma){
   // Ex:	this.modal = this.modalService.open(TurmasFormComponent )

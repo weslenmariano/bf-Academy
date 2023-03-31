@@ -94,7 +94,15 @@ export class TurmasListComponent implements OnInit {
   // Ex:	this.modal = this.modalService.open(TurmasFormComponent )
     console.log("Turma", turma)
     this.modal = this.modalService.open(TurmasFormComponent,{ size: "lg"})
-    this.modal.componentInstance.data = turma
+    this.modal.componentInstance.turmaDados = turma // turma dados pode ser o nome que quiser
+
+    this.modal.result.catch((retorno) => {
+      console.log("Retorno do modal para essa tela", retorno)
+      if(retorno == 'save'){
+        this.ngOnInit()
+      }
+    })
+
   }
 
 
