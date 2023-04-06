@@ -12,12 +12,14 @@ import { ProfessoresModule } from './professores/professores.module';
 import { HomeComponent } from './home/home.component';
 import { TurmasModule } from './turmas/turmas.module';
 import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

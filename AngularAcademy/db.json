@@ -153,6 +153,15 @@
       "duracao": "15 semanas",
       "valor": "R$ 4.900,00",
       "dificuldade": 5
+    },
+    {
+      "id": 4,
+      "curso": 5,
+      "inicio": "03/04/2023",
+      "cargaHoraria": "48h",
+      "duracao": "8 semanas",
+      "valor": "R$ 2.300,00",
+      "dificuldade": 3
     }
   ]
 }

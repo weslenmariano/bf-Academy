@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -55,8 +55,8 @@ export class TurmasFormComponent implements OnInit{
     this.formulario = this.fb.group({
       id:[], 
       curso:[],
-      inicio:[],
-      cargaHoraria:[],
+      inicio:[null, Validators.required],
+      cargaHoraria:[null, [Validators.minLength(3), Validators.pattern('[0-9a-z-A-Z]*')]], // mais de uma validacao no campo do form group
       duracao:[],
       valor:[],
       dificuldade:[]
@@ -91,11 +91,19 @@ export class TurmasFormComponent implements OnInit{
   }
 
   onSubmit(){
-    this.spin = true
+    //console.log("Formulario stattus", this.formulario)
+    //return // teste de validacao de campos
+    this.spin = true 
+    let form =  this.formulario
+    form.markAllAsTouched() //  marca todos os campos como tocado para forçar as validaçoes
     console.log('Enviou')
     console.log('Form:', this.formulario )
-
-    this.subscriptions.push(this.salvar())
+    if(form.valid){
+      this.subscriptions.push(this.salvar())
+    }else{
+      this.toastr.error('Preencha o formulario corretamente','Erro ao validar formulário!')
+      this.spin = false
+    }
    
   }
 

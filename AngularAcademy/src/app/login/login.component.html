@@ -1,0 +1,36 @@
+<div id="login" class="bg2">
+
+	<div class="login-logo">
+		<h1>Angular Academy</h1>
+    <p class="version">v3.0.5.1</p>
+	</div>
+	
+	<div class="login-box">
+		<div class="bemvindo">Bem-vindo</div>
+		<div class="formulario">
+			<div class="row justify-content-center">
+				<div class="col-md-9">
+					<div class="input-group">
+						<span class="input-group-text"><span class="fas fa-user"></span></span>
+						<input type="text" #username class="form-control" placeholder="Username" />
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-9">
+					<div class="input-group">
+						<div class="input-group-text"><span class="fas fa-lock"></span></div>
+						<input type="password" #password class="form-control" id="" placeholder="Password" />
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<a (click)="autenticar(username.value, password.value)" class="btn btn-primary btn-icon col-md-3"><span class="fas fa-unlock"></span> Sign in</a>
+			</div>
+		</div>
+		<div class="esqueci">
+			<a href="#">Remember my password</a>
+		</div>
+	</div>
+		
+</div>

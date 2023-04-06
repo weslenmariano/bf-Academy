@@ -1,0 +1,64 @@
+#login {
+    background: -webkit-linear-gradient(#6e2583, #127cc1);
+    height: 100vh;
+    padding-top: 100px;
+  }
+  
+  .login-logo {
+    color:#fff;
+    text-align:center;
+    line-height: 6px;
+    margin-bottom:20px;
+  }
+  
+  .login-logo h1 {
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size: 2.6em;
+    margin: 0;
+  }
+    
+  .login-box {
+    background: #fff;
+    width: 400px;
+    margin: 0 auto;
+    font-family: "Montserrat UltraLight", Arial, Verdana;
+    border-radius: .25rem;
+  }
+  
+  .login-box .bemvindo {
+    background: -webkit-linear-gradient(#292929, #4e4e4e);
+    color: #fff;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 20px 0;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+  }
+  
+  .login-box .formulario {
+    padding: 40px 0 25px 0;
+  }
+  
+  .login-box .esqueci {
+    background: #f1f1f1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 15px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+  }
+  
+  .login-box .esqueci a {
+    color: #777;
+  }
+  
+  .login-box .input-group-addon .fas, .login-box .input-group-addon .far, .login-box .input-group-addon .fal {
+    color: #999;
+  }
+  
+  .input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control, .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select, .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+    border-radius: 0;
+  }

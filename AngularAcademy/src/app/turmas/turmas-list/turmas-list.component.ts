@@ -19,6 +19,7 @@ export class TurmasListComponent implements OnInit {
   cursos: Curso[]
   turmasSemFiltro: Turma[]
   modal: NgbModalRef
+  spin: boolean
 
   constructor(
     private service : TurmasService,
@@ -29,7 +30,7 @@ export class TurmasListComponent implements OnInit {
   ngOnInit(): void {
       //this.turmas = this.service.getAllTurmas();
       this.subscriptions.push(this.getTurmas())
-      this.subscriptions.push(this.getCursos())
+      
       
   }
 
@@ -42,15 +43,18 @@ export class TurmasListComponent implements OnInit {
   }
 
   getTurmas(){
+    this.spin = true
     return this.service.getAllTurmas().subscribe({
       next: (resposta: Turma[]) => {
         console.log('Retorno API', resposta)
         this.turmas = resposta
         this.turmasSemFiltro = resposta
+        this.spin = false
       },
       error: () => {},
       complete: () => {
-
+        this.subscriptions.push(this.getCursos())
+        this.spin = false
       }
     })
     //this.professores = this.service.getAllProfessores()
@@ -59,12 +63,12 @@ export class TurmasListComponent implements OnInit {
   }
 
   getCursos(){
-    
+    this.spin = true
     return this.cursosService.getAllCursos().subscribe({
       next: (resposta: Curso[]) => {
         console.log('Retorno API', resposta)
         this.cursos = resposta
-        
+        this.spin = false
       }, // pegando a resposta que a api retornoou
       error: (erro) => {}, // erro que pode acontecer na api
       complete: () => {
@@ -73,15 +77,19 @@ export class TurmasListComponent implements OnInit {
           let cursoSelecionado: any = this.cursos.find(el => el.id == element.curso )
           element.cursoNome = cursoSelecionado?.nome
         })
+        this.spin = false
       } // complete o que devera acontecer quando concluir a requisicao
+      
     })
 
   }
   filtrar(keyfilter : string){
+   this.spin = true
    this.zerarFiltro()
    if(keyfilter){
     this.turmas =  this.turmas.filter(f => f.cursoNome.toUpperCase().includes(keyfilter.toUpperCase()))
    }
+   this.spin = false
   }
 
   zerarFiltro(){

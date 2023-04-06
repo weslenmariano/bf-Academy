@@ -1077,8 +1077,224 @@ Ex:
   // Ex:	this.modal = this.modalService.open(TurmasFormComponent )
     console.log("Turma", turma)
     this.modal = this.modalService.open(TurmasFormComponent,{ size: "lg"})
-    this.modal.componentInstance.data = turma										<<---------------------
+    this.modal.componentInstance.data = turma										
   }
+  
+Retornando dados do modal para a tela que o chamou
+ // VAR - modal : NgbModalRef
+  // CONSTRUCTOR - public modalService: NgbModal,
+  openModal(turma?: Turma){
+  // Ex:	this.modal = this.modalService.open(TurmasFormComponent )
+    console.log("Turma", turma)
+    this.modal = this.modalService.open(TurmasFormComponent,{ size: "lg"})
+    this.modal.componentInstance.turmaDados = turma // turma dados pode ser o nome que quiser
+
+    this.modal.result.catch((retorno) => {								<<---------------------
+      console.log("Retorno do modal para essa tela", retorno)			<<---------------------
+      if(retorno == 'save'){											<<---------------------
+        this.ngOnInit()													<<---------------------
+      }
+    })
+
+  }
+  
+  
+  
+####################################
+#16 VALIDANDO DADOS VALIDACAO DE DADOS
+Validação de campos de um formulario com Validators do angular/forms
+Ex. TypeScript
+iniciaForm(){
+    this.formulario = this.fb.group({
+      id:[], 
+      curso:[],
+      inicio:[null, Validators.required],					<<------------------------------
+      cargaHoraria:[null, [Validators.minLength(3), Validators.pattern('[a-z-A-Z]*')]], // mais de uma validacao no campo do form group <<------------------------------
+      duracao:[],
+      valor:[],
+      dificuldade:[]
+    })
+  }
+  
+onSubmit(){
+    //console.log("Formulario stattus", this.formulario)
+    //return // teste de validacao de campos
+    this.formulario.markAllAsTouched() //  marca todos os campos como tocado para forçar as validaçoes			<<-------------------------
+    this.spin = true  
+    console.log('Enviou')
+    console.log('Form:', this.formulario )
+
+    if(this.formulario.valid){
+      this.subscriptions.push(this.salvar())
+    }
+   
+  }  
+
+Ex. HTML
+Exibindo no HTML com bootstrap, que só aparece o feedback, caso tenha o status de invalido no campo
+<div class="col-md-3">
+	<label>Início</label>
+	<input type="text" formControlName="inicio" [class.is-invalid]="formulario.controls['inicio'].invalid && formulario.controls['inicio'].touched" class="form-control form-control-sm" />   <<-----------------
+	<div class="invalid-feedback">Campo obrigtório</div>	<<-----------------
+</div>
+
+
+
+####################################
+
+#17 CRIACAO DE GUARDA ROTAS LOGIN
+
+Criar um novo guard na ( como se fosse a criacao de um modulo ou componente, porem nesse caso é um guard, de guarda rotas)
+>>> ng g g login/shared/auth
+
+Selecionamos o CanActivate
+
+(*) CanActivate
+( ) CanActivateChild
+( ) CanDeactivate
+( ) CanLoad
+( ) CanMatch
+
+-Foi criado o diretorio login/shared dentro do projeto...
+em auth.guard.ts é onde fazemos a configuração da rota, ao qual sera gerenciada.
+
+-Agora nos modulos do projeto iremos configurar os routing-modulo.ts, adicionando o canActivate
+Ex:
+--Configuracao de rota no modulo de cursos (colocar o canActivate em todos os modulos de rota)
+--------------------------
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CursosFormComponent } from './cursos-form/cursos-form.component';
+import { CursosListComponent } from './cursos-list/cursos-list.component';
+import { CursosSingleComponent } from './cursos-single/cursos-single.component';
+import { AuthGuard } from '../login/shared/auth.guard';									<<---------------------------
+
+const routes: Routes = [
+  {path: 'cursos', component: CursosListComponent, canActivate: [AuthGuard]},			<<---------------------------
+  {path: 'cursos/novo', component: CursosFormComponent},
+  {path: 'cursos/edit/:id', component: CursosFormComponent},
+  {path: 'cursos/:id', component: CursosSingleComponent}
+  
+  
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CursosRoutingModule { }
+
+
+--------------------------
+
+>>> Criando o componente de login
+> ng g c login
+
+como o login nao tem um modulo proprio, pois nao vamos criar varios componente relacionados ao login, 
+vamos utilizar o app-routin.module.ts para definir a rota para o componente login
+Ex:
+--------------------------
+const routes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent}		<<-----------------------
+];
+--------------------------
+
+
+>> No auth.guard.ts
+vamos fazer os redirecinamentos para as telas que precisam estar logadas
+Como o precisaremos fazer uma injeção de dependencia para redirecionar as telas para o login, no caso do usuario nao poder acessar
+precisamos de um constructor, que por default não é criado automaticamente ao executar o ng g g ...
+Ex:
+-----------------------------------------------------------------------------------
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';	<<--------------
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  /**
+   *
+   */
+  constructor( 								<<----------------------------
+    private router: Router					<<----------------------------
+  ){										<<----------------------------
+
+  }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+      this.router.navigate(['/login'])		<<----------------------------
+    return false;
+  }
+  
+}
+-----------------------------------------------------------------------------------
+
+>> Criando um serviço para login 
+ng g s login/shared/auth
+
+- fazemos a chamada da api com o login 
+Ex: auth.service.ts
+-----------------------
+autenticaLogin(user: string, pass: string){
+    
+    // simulando o retorno de uma API ou base de dados
+    let userDB: any = {
+      username: 'weslen',
+      password: '1234'
+    }
+    ////
+
+    if(user == userDB.username && pass == userDB.password){
+      return true
+    }
+
+    return false
+
+  }
+-----------------------
+>> Usando o localStorage para armagezar as informaçoes no navegador localmente.
+localStorage.setItem('userData',user)		<<---------------- guardando o valor
+localStorage.getItem('userDatta')			<<---------------- recuperando o valor
+
+-- O menu lateral deve ficar oculto na tela de login, para isso criamos um ngif no menu
+e criamos uma variavel no app.component, somente quando essa variavel for true, exibimos o menu lateral.
+
+Porem, o app compomente é carregado somente uma vez, com isso ao logar a variavel fica true, e o menu não é refletido.
+para resolver isso fazemos uma atualização da tela com o window.reload apos o login bem sucedido e apos o redirecionamento concluido
+usamos a propriedade then e um arrow function para realizar essa atualizacao de variavel.
+>>>> Apos logar, autenticar e redirecionar vamos fazer um window.reload para que o menu volte a aparecer na lateral
+Ex:
+---------------------------------------
+  autenticar(user: string, pass: string){
+    let login = this.service.autenticaLogin(user, pass)
+
+    console.log("*** Login : ", login )
+    if(login){
+      localStorage.setItem('userData',user)
+      this.toastr.success('Usuário autenticado com secesso!')
+
+      setTimeout(() => {
+	  //timeout para ficar processando na tela
+	  }, 1000)
+	  
+	  
+	this.router.navigate(['cursos']).then(() => {				<<-------------------------
+	  window.location.reload()									<<-------------------------
+	})															<<-------------------------
+      
+      
+    }else{
+      this.toastr.error('Usuario e/ou senha inválidos', 'Verifique os dados informados')
+    }
+  }
+---------------------------------------
+
  
 ///// Snipet
 "fform":{"prefix": "fform","body": ["// VAR - formulario: FormGroup",

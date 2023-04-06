@@ -1,7 +1,7 @@
 <app-spin *ngIf="spin"></app-spin>
 <div class="modal-header">
   <h1><span class="fas fa-calendar-days"></span> CADASTRANDO/EDITANDO Turma <span class="active">#2</span></h1>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Close')"></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="formulario">  
@@ -15,11 +15,13 @@
       </div>
       <div class="col-md-3">
         <label>Início</label>
-        <input type="text" formControlName="inicio" class="form-control form-control-sm" />
+        <input type="text" formControlName="inicio" [class.is-invalid]="formulario.controls['inicio'].invalid && formulario.controls['inicio'].touched" class="form-control form-control-sm" />
+        <div class="invalid-feedback">Campo obrigtório</div>
       </div>
       <div class="col-md-3">
         <label>Carga horária</label>
-        <input type="text" formControlName="cargaHoraria" class="form-control form-control-sm" />
+        <input type="text" formControlName="cargaHoraria" [class.is-invalid]="formulario.controls['cargaHoraria'].invalid" class="form-control form-control-sm" />
+        <div class="invalid-feedback">Campo obrigtório</div>
       </div>
       <div class="col-md-3">
         <label>Duração</label>
