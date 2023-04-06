@@ -1294,7 +1294,7 @@ Ex:
     }
   }
 ---------------------------------------
-
+Realizado validacao de expiracao de data de acesso para o usuario logado
  
 ///// Snipet
 "fform":{"prefix": "fform","body": ["// VAR - formulario: FormGroup",
