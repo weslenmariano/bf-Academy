@@ -15,7 +15,8 @@
       </div>
       <div class="col-md-3">
         <label>Início</label>
-        <input type="text" formControlName="inicio" [class.is-invalid]="formulario.controls['inicio'].invalid && formulario.controls['inicio'].touched" class="form-control form-control-sm" />
+        <input type="text" formControlName="inicio" mask="00/00/0000" [showMaskTyped]="true"
+        [class.is-invalid]="formulario.controls['inicio'].invalid && formulario.controls['inicio'].touched" class="form-control form-control-sm" />
         <div class="invalid-feedback">Campo obrigtório</div>
       </div>
       <div class="col-md-3">
@@ -32,6 +33,10 @@
         <input type="text" formControlName="valor" class="form-control form-control-sm" />
       </div>
       <div class="col-md-3">
+        <label>Telefone Teste</label>
+        <input type="text" mask="(00) 0000-0000 || (00) 0 0000-0000" class="form-control form-control-sm" />
+      </div>
+      <div class="col-md-3">
         <label>Dificuldade</label>
         <input type="text" formControlName="dificuldade" class="form-control form-control-sm" />
       </div>
@@ -39,7 +44,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-success" (click)="onSubmit()"><span class="fas fa-floppy-disk"></span> Salvar</button>
+  <button class="btn btn-success" (click)="onSubmit()" ><span class="fas fa-floppy-disk"></span> Salvar</button>
   <button class="btn btn-danger" (click)="activeModal.dismiss('cancelar')"><span class="fas fa-times"  ></span> Cancelar</button>
 </div>
 <!--

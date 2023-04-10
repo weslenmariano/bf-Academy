@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+    //window.location.reload()
   }
 
   autenticar(user: string, pass: string){
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit{
 
 
       localStorage.setItem('expiraData',expiraBr)
-      this.router.navigate(['cursos']).then(() => {
+      this.router.navigate(['/']).then(() => {
         window.location.reload()
       })
       

@@ -1295,6 +1295,13 @@ Ex:
   }
 ---------------------------------------
 Realizado validacao de expiracao de data de acesso para o usuario logado
+
+#18 Inclusao de mascara nos campos pelo NGX-MASK
+
+>> npm i ngx-mask
+ 
+>No modulo que vai usar mascara, fazer a importacao do NgxMaskModule.forRoot() 
+ 
  
 ///// Snipet
 "fform":{"prefix": "fform","body": ["// VAR - formulario: FormGroup",

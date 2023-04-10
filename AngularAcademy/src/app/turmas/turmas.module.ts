@@ -6,6 +6,8 @@ import { TurmasListComponent } from './turmas-list/turmas-list.component';
 import { TurmasFormComponent } from './turmas-form/turmas-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
+//import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     SharedModule,
     TurmasRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
+    //NgxMaskModule.forChild()
   ], 
   exports: [
     TurmasListComponent
